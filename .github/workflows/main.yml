@@ -1,0 +1,27 @@
+name: Create the customization package
+run-name: Creating 01MIT_INST-NDE Customization Package Zip
+on: [push, workflow_dispatch]
+jobs:
+  create-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+
+      - name: Build
+        run: |
+          npm install -g @angular/cli
+          npm install
+          npm run build
+          mv /home/runner/work/customModule/customModule/dist/01MIT_INST-nde /home/runner/work/customModule/customModule/01MIT_INST-nde
+          
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: 01MIT_INST-nde
+          path: /home/runner/work/customModule/customModule/01MIT_INST-nde
