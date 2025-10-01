@@ -1,9 +1,23 @@
 @use '@angular/material' as mat;
-@use 'm3-theme' as m3-theme;
+//@use 'm3-theme' as m3-theme;
 
-//uncomment the following lines in order to apply your own theme
+@import url('https://use.typekit.net/ixd2vgq.css?ver=0.7');
 
-//.custom-nde-theme{
-//  @include mat.all-component-colors(m3-theme.$light-theme);
-//  @include mat.system-level-colors(m3-theme.$light-theme);
-//}
+
+
+
+$mit-typography: mat.define-theme((typography :(brand-family: "neue-haas-grotesk-display",
+                plain-family: "neue-haas-grotesk-text"
+            )));
+
+html {
+    @include mat.all-component-typographies($mit-typography);
+    @include mat.system-level-typography($mit-typography)
+}
+
+
+/* Apply to components */
+/* .custom-nde-theme {
+    @include mat.all-component-colors(m3-theme.$light-theme);
+    @include mat.system-level-colors(m3-theme.$light-theme);
+} */
