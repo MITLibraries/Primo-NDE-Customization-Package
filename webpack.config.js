@@ -58,10 +58,10 @@ module.exports = {
         library: { type: "module" },
 
         // For remotes (please adjust)
-        name: "customModule",
+        name: "MIT-Style",
         filename: "remoteEntry.js",
         exposes: {
-            './custom-module': './src/bootstrap.ts',
+            './MIT-Style': './src/bootstrapMIT-Style.ts',
         },
 
         // For hosts (please adjust)
