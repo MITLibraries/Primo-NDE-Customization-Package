@@ -1,0 +1,4 @@
+<p>tacos works!</p>
+@if (tacosResponse$ | async; as response) {
+<p>tacos response: {{ response.data.logSearchEvent.phrase }}</p>
+}
