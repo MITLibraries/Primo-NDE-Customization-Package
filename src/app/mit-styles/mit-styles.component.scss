@@ -4,7 +4,7 @@ $mit-typography: mat.define-theme((typography :(brand-family: "neue-haas-grotesk
                 plain-family: "neue-haas-grotesk-text"
             )));
 
-html {
+.custom-nde-theme {
     @include mat.all-component-typographies($mit-typography);
     @include mat.system-level-typography($mit-typography)
 }
