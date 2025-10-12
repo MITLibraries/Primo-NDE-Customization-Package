@@ -1,15 +1,15 @@
-import {ApplicationRef, DoBootstrap, Injector, ModuleWithProviders, NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {AppComponent} from './app.component';
-import {createCustomElement, NgElementConstructor} from "@angular/elements";
-import {Router} from "@angular/router";
-import {selectorComponentMap} from "./custom1-module/customComponentMappings";
-import {TranslateModule} from "@ngx-translate/core";
+import { ApplicationRef, DoBootstrap, Injector, ModuleWithProviders, NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+import { createCustomElement, NgElementConstructor } from "@angular/elements";
+import { Router } from "@angular/router";
+import { selectorComponentMap } from "./mit-styles/customComponentMappings";
+import { TranslateModule } from "@ngx-translate/core";
 import { CommonModule } from '@angular/common';
 import { AutoAssetSrcDirective } from './services/auto-asset-src.directive';
 
-export const AppModule = ({providers}: {providers:any}) => {
-   @NgModule({
+export const AppModule = ({ providers }: { providers: any }) => {
+  @NgModule({
     declarations: [
       AppComponent,
       AutoAssetSrcDirective
@@ -23,8 +23,8 @@ export const AppModule = ({providers}: {providers:any}) => {
     providers: providers,
     bootstrap: []
   })
-  class AppModule implements DoBootstrap{
-    private webComponentSelectorMap = new Map<string,  NgElementConstructor<unknown>>();
+  class AppModule implements DoBootstrap {
+    private webComponentSelectorMap = new Map<string, NgElementConstructor<unknown>>();
 
     constructor(private injector: Injector, private router: Router) {
       router.dispose(); //this prevents the router from being initialized and interfering with the shell app router
@@ -32,7 +32,7 @@ export const AppModule = ({providers}: {providers:any}) => {
 
     ngDoBootstrap(appRef: ApplicationRef) {
       for (const [key, value] of selectorComponentMap) {
-        const customElement = createCustomElement(value, {injector: this.injector});
+        const customElement = createCustomElement(value, { injector: this.injector });
         this.webComponentSelectorMap.set(key, customElement);
       }
     }
@@ -41,7 +41,7 @@ export const AppModule = ({providers}: {providers:any}) => {
      * Use componentMapping, selectorComponentMap
      * @param componentName
      */
-    public getComponentRef(componentName:string) {
+    public getComponentRef(componentName: string) {
       return this.webComponentSelectorMap.get(componentName);
     }
   }
