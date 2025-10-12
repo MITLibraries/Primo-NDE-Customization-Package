@@ -2,7 +2,8 @@
 @use 'm3-theme' as m3-theme;
 
 
-
-
-
-@import "../test/test.component.scss"
+/* Apply to components */
+/* .custom-nde-theme {
+    @include mat.all-component-colors(m3-theme.$light-theme);
+    @include mat.system-level-colors(m3-theme.$light-theme);
+} */
