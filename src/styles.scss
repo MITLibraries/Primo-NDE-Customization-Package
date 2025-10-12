@@ -11,6 +11,7 @@ $mit-typography: mat.define-theme((typography :(brand-family: "neue-haas-grotesk
         plain-family: "neue-haas-grotesk-text"
       )));
 
+//src/styles.scss
 html {
   @include mat.all-component-typographies($mit-typography);
   @include mat.system-level-typography($mit-typography)
