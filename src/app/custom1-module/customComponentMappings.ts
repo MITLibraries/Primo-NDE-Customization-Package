@@ -1,4 +1,4 @@
-import { TestComponent } from "../test/test.component";
+import { TestComponent } from "../testcomponent/test.component";
 
 // Define the map
 export const selectorComponentMap = new Map<string, any>([

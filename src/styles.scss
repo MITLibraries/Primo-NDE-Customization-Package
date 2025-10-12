@@ -2,17 +2,9 @@
 @use '@angular/material' as mat;
 @include mat.core();
 
-@import url('https://use.typekit.net/ixd2vgq.css?ver=0.7');
+$primary: mat.m2-define-palette(mat.$m2-indigo-palette);
+$accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
+$theme: mat.m2-define-light-theme((color: (primary: $primary,
+        accent: $accent )));
 
-
-
-
-$mit-typography: mat.define-theme((typography :(brand-family: "neue-haas-grotesk-display",
-        plain-family: "neue-haas-grotesk-text"
-      )));
-
-//src/styles.scss
-html {
-  @include mat.all-component-typographies($mit-typography);
-  @include mat.system-level-typography($mit-typography)
-}
+@include mat.all-component-themes($theme);

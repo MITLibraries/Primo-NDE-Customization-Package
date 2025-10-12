@@ -1,18 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
-@use '@angular/material' as mat;
-@include mat.core();
+@use "@angular/material" as mat;
+@use "m3-theme" as m3-theme;
 
-@import url('https://use.typekit.net/ixd2vgq.css?ver=0.7');
+//uncomment the following lines in order to apply your own theme
 
+//.custom-nde-theme{
+//  @include mat.all-component-colors(m3-theme.$light-theme);
+//  @include mat.system-level-colors(m3-theme.$light-theme);
+//}
 
-
-
-$mit-typography: mat.define-theme((typography :(brand-family: "neue-haas-grotesk-display",
-                plain-family: "neue-haas-grotesk-text"
-            )));
-
-//src/app/styles/_customized-theme.scss
-html {
-    @include mat.all-component-typographies($mit-typography);
-    @include mat.system-level-typography($mit-typography)
-}
+/* Include select overrides in the custom.css bundle so the host page loads them */
+@import "../custom1-module/global-typography-overrides.scss"
