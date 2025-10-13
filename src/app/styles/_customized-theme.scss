@@ -12,13 +12,6 @@ $mit-typography: mat.define-theme((typography :(brand-family: "neue-haas-grotesk
     //@include mat.system-level-typography($mit-typography);
 }
 
-p.this-is-a-test {
-    font-size: xx-large !important
-}
-
-
-
-
 html {
     @include mat.all-component-typographies($mit-typography);
     @include mat.system-level-typography($mit-typography)
