@@ -4,11 +4,18 @@
 
 $primary: mat.m2-define-palette(mat.$m2-indigo-palette);
 $accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
-$theme: mat.m2-define-light-theme((
-  color: (
-    primary: $primary,
-    accent: $accent
-  )
-));
+$theme: mat.m2-define-light-theme((color: (primary: $primary,
+        accent: $accent )));
 
 @include mat.all-component-themes($theme); */
+
+@use '@angular/material' as mat;
+@import url('https://use.typekit.net/ixd2vgq.css?ver=0.7');
+$mit-typography: mat.define-theme((typography :(brand-family: "neue-haas-grotesk-display",
+        plain-family: "neue-haas-grotesk-text"
+      )));
+
+.custom-nde-theme {
+  @include mat.all-component-typographies($mit-typography);
+  @include mat.system-level-typography($mit-typography)
+}
