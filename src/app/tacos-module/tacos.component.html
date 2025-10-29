@@ -1,4 +1,7 @@
 <p>tacos works!</p>
 @if (tacosResponse$ | async; as response) {
-<p>tacos response: {{ response.data.logSearchEvent.phrase }}</p>
+@for (suggestion of response.data.logSearchEvent.detectors.suggestedResources; track suggestion.url ) {
+<p>tacos url: {{ suggestion.url }}</p>
+<p>tacos title: {{suggestion.title}}</p>
+}
 }
