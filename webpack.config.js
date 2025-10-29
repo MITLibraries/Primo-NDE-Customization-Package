@@ -13,7 +13,7 @@ sharedMappings.register(
 module.exports = {
   context: path.resolve(__dirname), // Sets the context to the directory where webpack.config.js is
   output: {
-    uniqueName: "tacos",
+    uniqueName: "customModule",
     publicPath: 'auto',
   },
   optimization: {
@@ -61,10 +61,10 @@ module.exports = {
       library: { type: "module" },
 
       // For remotes (please adjust)
-      name: "tacos",
+      name: "customModule",
       filename: "remoteEntry.js",
       exposes: {
-        './tacos': './src/bootstraptacos.ts',
+        './custom-module': './src/bootstrap.ts',
       },
 
       // For hosts (please adjust)
