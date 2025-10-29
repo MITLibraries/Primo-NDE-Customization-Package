@@ -61,10 +61,10 @@ module.exports = {
       library: { type: "module" },
 
       // For remotes (please adjust)
-      name: "customModule",
+      name: "tacos",
       filename: "remoteEntry.js",
       exposes: {
-        './custom-module': './src/bootstrap.ts',
+        './tacos': './src/bootstraptacos.ts',
       },
 
       // For hosts (please adjust)

@@ -1,2 +1,2 @@
-import('./bootstrap')
+import('./bootstraptacos')
 	.catch(err => console.error(err));

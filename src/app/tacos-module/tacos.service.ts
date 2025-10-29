@@ -22,7 +22,7 @@ export class TacosService {
   getTacosResponse(searchTerm?: string): Observable<any> {
     const safeTerm = (searchTerm ?? '').replace(/"/g, '\\"');
     const graphQlQuery = `{logSearchEvent(searchTerm: "${safeTerm}", sourceSystem: "primo-production") {phrase detectors {suggestedResources {title url}}}}`;
-
+    console.log(graphQlQuery)
     return this.httpClient.post(
       this.tacosUrl,
       { query: graphQlQuery },
