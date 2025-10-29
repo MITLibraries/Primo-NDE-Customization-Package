@@ -1,2 +1,2 @@
-import('./bootstrapmit-tacos')
+import('./bootstraptacos')
 	.catch(err => console.error(err));

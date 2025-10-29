@@ -61,10 +61,10 @@ module.exports = {
       library: { type: "module" },
 
       // For remotes (please adjust)
-      name: "mit-tacos",
+      name: "tacos",
       filename: "remoteEntry.js",
       exposes: {
-        './mit-tacos': './src/bootstrapmit-tacos.ts',
+        './tacos': './src/bootstraptacos.ts',
       },
 
       // For hosts (please adjust)
@@ -80,8 +80,8 @@ module.exports = {
         "rxjs": { requiredVersion: "auto" },
         "@angular/common/http": { requiredVersion: "auto" },
         '@angular/platform-browser': { requiredVersion: 'auto' },
-        '@ngx-translate/core': { singleton: true},
-        '@ngrx/store': { singleton: true},
+        '@ngx-translate/core': { singleton: true },
+        '@ngrx/store': { singleton: true },
         ...sharedMappings.getDescriptors()
       })
 
