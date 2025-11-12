@@ -40,13 +40,16 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
-        { from: 'src/assets', to: 'assets',
-      noErrorOnMissing: true,
-      globOptions: {
-      ignore: [
+        {
+          from: 'src/assets', to: 'assets',
+          noErrorOnMissing: true,
+          globOptions: {
+            ignore: [
               "**/.gitkeep", // Make sure this matches exactly the files you want to exclude
               "**/.*" // This pattern excludes all hidden files
-            ] } } // Adjust the paths as needed
+            ]
+          }
+        } // Adjust the paths as needed
       ]
     }),
     // DISABLE ngDevMode as it is not needed in a remoteEntry work around for issue: https://github.com/angular-architects/module-federation-plugin/issues/458
@@ -55,20 +58,20 @@ module.exports = {
     // }),
     // END DISABLE ngDevMode as it is not needed in a remoteEntry
     new ModuleFederationPlugin({
-        library: { type: "module" },
+      library: { type: "module" },
 
-        // For remotes (please adjust)
-        name: "customModule",
-        filename: "remoteEntry.js",
-        exposes: {
-            './custom-module': './src/bootstrap.ts',
-        },
+      // For remotes (please adjust)
+      name: "customModule",
+      filename: "remoteEntry.js",
+      exposes: {
+        './custom-module': './src/bootstrap.ts',
+      },
 
-        // For hosts (please adjust)
-        // remotes: {
-        //     "mfe1": "http://localhost:3000/remoteEntry.js",
+      // For hosts (please adjust)
+      // remotes: {
+      //     "mfe1": "http://localhost:3000/remoteEntry.js",
 
-        // },
+      // },
 
       shared: share({
         "@angular/core": { requiredVersion: "auto" },
