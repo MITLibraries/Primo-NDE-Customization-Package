@@ -28,15 +28,15 @@ module.exports = {
   experiments: {
     outputModule: true
   },
-  module: {
-    rules: [
-      // ... other rules ...
-      {
-        test: /\.(png|jpe?g|gif|svg)$/i,
-        type: 'asset/resource',
-      },
-    ],
-  },
+  // module: {
+  //   rules: [
+  //     // ... other rules ...
+  //     {
+  //       test: /\.(png|jpe?g|gif|svg)$/i,
+  //       type: 'asset/resource',
+  //     },
+  //   ],
+  // },
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
@@ -80,8 +80,8 @@ module.exports = {
         "rxjs": { requiredVersion: "auto" },
         "@angular/common/http": { requiredVersion: "auto" },
         '@angular/platform-browser': { requiredVersion: 'auto' },
-        '@ngx-translate/core': { singleton: true},
-        '@ngrx/store': { singleton: true},
+        '@ngx-translate/core': { singleton: true },
+        '@ngrx/store': { singleton: true },
         ...sharedMappings.getDescriptors()
       })
 
