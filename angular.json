@@ -25,7 +25,6 @@
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "src/styles.scss",
               {
                 "input": "src/app/styles/_customized-theme.scss",
                 "bundleName": "custom",
@@ -97,7 +96,13 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "styles": [
+              {
+                "input": "src/app/styles/_customized-theme.scss",
+                "bundleName": "custom",
+                "inject": false
+              }
+            ],
             "scripts": []
           }
         }
