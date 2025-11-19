@@ -28,15 +28,15 @@ module.exports = {
   experiments: {
     outputModule: true
   },
-  // module: {
-  //   rules: [
-  //     // ... other rules ...
-  //     {
-  //       test: /\.(png|jpe?g|gif|svg)$/i,
-  //       type: 'asset/resource',
-  //     },
-  //   ],
-  // },
+  module: {
+    rules: [
+      // ... other rules ...
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        type: 'asset/resource',
+      },
+    ],
+  },
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
