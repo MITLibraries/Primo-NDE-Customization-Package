@@ -26,9 +26,9 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               {
-                "input": "src/app/styles/_customized-theme.scss",
+                "input": "src/assets/mit-theme.scss",
                 "bundleName": "custom",
-                "inject": false
+                "inject": true
               }
             ],
             "scripts": [],
