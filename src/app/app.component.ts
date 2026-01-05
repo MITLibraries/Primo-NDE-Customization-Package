@@ -1,13 +1,3 @@
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
-})
-export class AppComponent {
-  title = 'custom-module';
-  public getTitle(){
-    return this.title;
-  }
-}
+// AppComponent intentionally left blank/removed for federation build.
+// This file is retained as a harmless placeholder to avoid toolchain errors.
+export { };
