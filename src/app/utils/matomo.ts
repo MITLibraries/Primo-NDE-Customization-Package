@@ -1,3 +1,8 @@
+/* 
+* This function injects the Matomo Tag Manager <script> into the current document. 
+* This function is called by src/bootstrap.ts.  
+*/
+
 export function injectMatomo() {
     try {
         const w = window as any;
