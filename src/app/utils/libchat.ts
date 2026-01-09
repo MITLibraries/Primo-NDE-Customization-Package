@@ -11,10 +11,14 @@ export function injectLibchat() {
         document.getElementsByTagName("body")[0].appendChild(div);
         var scr = document.createElement("script");
         scr.src = "https://libanswers.mit.edu/load_chat.php?hash=" + libchatHash;
+        // we added this error handling to the libanswers-provided script for libchat
+        scr.onerror = (ev) => {
+            console.error('Libchat script failed to load', scr.src, ev);
+        };
         setTimeout(function () {
             document.getElementsByTagName("body")[0].appendChild(scr);
         }, 2000);
     } catch (e) {
-        // keep bootstrap silent on failures
+        console.error('error injecting libchat', e)
     }
 }
