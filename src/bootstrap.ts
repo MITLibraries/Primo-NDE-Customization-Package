@@ -1,9 +1,13 @@
 import "@angular/compiler";
 import { AppModule } from './app/app.module';
-import {bootstrap} from "@angular-architects/module-federation-tools";
+import { bootstrap } from "@angular-architects/module-federation-tools";
+import { injectMatomo } from './app/utils/matomo';
 
 export const bootstrapRemoteApp = (bootstrapOptions: any) => {
-   return bootstrap(AppModule(bootstrapOptions), {
+  // Keep bootstrap minimal: always inject Matomo from helper.
+  injectMatomo();
+
+  return bootstrap(AppModule(bootstrapOptions), {
     production: true,
     appType: 'microfrontend'
   }).then(r => {
