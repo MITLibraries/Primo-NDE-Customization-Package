@@ -15,6 +15,9 @@ export function injectMatomo() {
             const s = d.getElementsByTagName('script')[0];
             g.async = true;
             g.src = 'https://matomo.libraries.mit.edu/js/container_SF5ZTPZP.js';
+            g.onerror = (ev) => {
+                console.error('Matomo script failed to load', g.src, ev);
+            };
             if (s && s.parentNode) {
                 s.parentNode.insertBefore(g, s);
             } else {
@@ -23,6 +26,6 @@ export function injectMatomo() {
         })();
         w._mtm.__matomo_injected = true;
     } catch (e) {
-        // keep bootstrap silent on failures
+        console.error('error injecting matomo', e)
     }
 }
