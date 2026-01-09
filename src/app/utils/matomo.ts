@@ -15,6 +15,7 @@ export function injectMatomo() {
             const s = d.getElementsByTagName('script')[0];
             g.async = true;
             g.src = 'https://matomo.libraries.mit.edu/js/container_SF5ZTPZP.js';
+            // we added this error handling to the matomo-provided script
             g.onerror = (ev) => {
                 console.error('Matomo script failed to load', g.src, ev);
             };
