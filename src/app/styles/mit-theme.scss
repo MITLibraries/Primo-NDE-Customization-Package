@@ -1,0 +1,19 @@
+@use '@angular/material' as mat;
+@use 'm3-theme.scss' as m3-theme;
+@import url('https://use.typekit.net/ixd2vgq.css?ver=0.7');
+$mit-typography: mat.define-theme((typography :(brand-family: "neue-haas-grotesk-display",
+                plain-family: "neue-haas-grotesk-text"
+            )));
+
+
+// Set all fonts in NDE to Typekit neue haas grotesk
+html {
+    @include mat.all-component-typographies($mit-typography);
+    @include mat.system-level-typography($mit-typography)
+}
+
+// Set default theme colors for NDE
+.custom-nde-theme {
+    @include mat.all-component-colors(m3-theme.$light-theme);
+    @include mat.system-level-colors(m3-theme.$light-theme);
+}
