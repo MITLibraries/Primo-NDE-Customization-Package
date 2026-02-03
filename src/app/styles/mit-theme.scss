@@ -14,8 +14,23 @@ html {
 
 // Set default theme colors for NDE
 .custom-nde-theme {
-    @include mat.all-component-colors(m3-theme.$light-theme);
-    @include mat.system-level-colors(m3-theme.$light-theme);
+    // @include mat.all-component-colors(m3-theme.$light-theme);
+    // @include mat.system-level-colors(m3-theme.$light-theme);
+}
+
+//===================
+// HELPERS
+//===================
+.sr {
+  border: 0 none;
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  word-wrap: normal;
 }
 
 //===================
@@ -24,9 +39,16 @@ html {
 $color-white: #fff;
 $color-black: #000;
 
-$color-gray-400: #B3B3B3;
-$color-gray-600: #666666;
-$color-gray-975: #1A1A1A;
+$color-gray-100: #F2F2F2;
+$color-gray-200: #e6e6e6;
+$color-gray-300: #ccc;
+$color-gray-400: #b3b3b3;
+$color-gray-500: #999;
+$color-gray-600: #808080;
+$color-gray-700: #666;
+$color-gray-900: #333;
+$color-gray-950: #1a1a1a;
+$color-gray-975: #191919;
 
 $color-red-600: #E50000;
 
@@ -42,6 +64,50 @@ $color-red-600: #E50000;
     outline: 2px solid #00C8FF !important;
     outline-offset: 2px !important;
 }
+
+@mixin text-decoration-animation {
+    transition: text-decoration 150ms ease;
+    text-decoration: none; // Included as fallback if text-decoration-color isn't supported
+    text-decoration: underline transparent;
+}
+
+//===================
+// INSTITUTE BAR
+//===================
+
+.institute-bar {
+    background-color: $color-gray-900;
+        
+    .wrapper {
+        display: flex;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        width: clamp(1088px,85%,1368px);
+        margin: 0 auto;
+    }
+
+    .link-logo-mit { height: 24px; } // Sets link around logo to match logo height
+
+    nav {
+        flex: 1;
+        display: flex;
+        gap: 24px;
+        justify-content: flex-end;
+
+        a {
+            color: $color-gray-300;
+            font-size: 1.5rem;
+            padding-top: 2px;
+            @include text-decoration-animation;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+}
+
 
 //===================
 // MAIN NAVIGATION
@@ -103,9 +169,9 @@ header.top-bar {
     }
 }
 
-//===================
+//===============================================
 // SEARCH CONTAINERS (Homepage and Child Pages)
-//===================
+//===============================================
 
 //Override homepage search container height
 .container[_ngcontent-ng-c1837336355] .custom-search-bar-container[_ngcontent-ng-c1837336355] {
@@ -168,4 +234,70 @@ div.search-container {
         }
     }
 
+}
+
+//===============================================
+// FOOTERS (Libraries and Institute)
+//===============================================
+
+footer {
+    letter-spacing: 0;
+
+    .wrapper {
+        padding: 16px 0;
+        width: clamp(1088px,85%,1368px);
+        margin: 0 auto;
+    }
+
+    .libraries-footer {
+        background-color: $color-gray-975;        
+
+        .wrapper {
+            background: url("https://cdn.mitlibrary.net/files/branding/local/vi-shape7-tp.svg") no-repeat 10% center;
+            display: flex;
+            padding: 32px 0;
+        }
+
+        a.logo-mit-lib {
+            height: 32px;
+            margin-right: 48px;
+        }
+
+        nav {
+            
+            display: flex;
+            gap: 32px;
+
+            a {
+                color: $color-gray-300;
+                font-size: 0.9375rem;
+                @include text-decoration-animation;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+        }
+    }
+
+    .institute-footer {
+        background-color: $color-gray-900;
+        color: $color-gray-300;    
+        font-size: 0.75rem;
+
+        .wrapper {
+            display: flex;
+            gap: 32px;
+        }
+
+        .link-logo-mit img {
+            height: 24px;
+        }
+
+        a {
+        
+        color: $color-gray-300;
+        }
+    }
 }
