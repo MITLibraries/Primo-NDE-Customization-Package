@@ -18,6 +18,23 @@ html {
     // @include mat.system-level-colors(m3-theme.$light-theme);
 }
 
+// Helper to mimic Primo responsive container widths
+@mixin applyPrimoContainerWidths {
+    width: clamp(1088px,85%,1368px);
+
+    @media (min-width: 960px) and (max-width: 1279.98px) {
+        width: clamp(912px,85%,1088px);
+    }
+
+    @media only screen and (min-width: 600px) and (max-width: 959.98px) {
+        width: clamp(288px,88.42544317%,848px);
+    }
+    
+    @media only screen and (max-width: 599.98px) {
+        width: 100%;
+    }    
+}
+
 //===================
 // HELPERS
 //===================
@@ -82,8 +99,14 @@ $color-red-600: #E50000;
         display: flex;
         padding-top: 16px;
         padding-bottom: 16px;
-        width: clamp(1088px,85%,1368px);
         margin: 0 auto;
+
+        @include applyPrimoContainerWidths;        
+
+        @media (max-width: 600px) {
+            padding-left: 16px;
+            padding-right: 16px;            
+        }
     }
 
     .link-logo-mit { height: 24px; } // Sets link around logo to match logo height
@@ -174,18 +197,24 @@ header.top-bar {
 //===============================================
 
 //Override homepage search container height
-.container[_ngcontent-ng-c1837336355] .custom-search-bar-container[_ngcontent-ng-c1837336355] {
+.container[_ngcontent-ng-c1837336355] .custom-search-bar-container[_ngcontent-ng-c1837336355], .general-search-header[_ngcontent-ng-c1773182704] {
     height: auto !important;
 }
 
 // Override search box wrapper
-.search-bar-container[_ngcontent-ng-c133002507] .search-bar-wrapper[_ngcontent-ng-c133002507] {
+.search-bar-container[_ngcontent-ng-c133002507] .search-bar-wrapper[_ngcontent-ng-c133002507], .search_box_container[_ngcontent-ng-c4036046928] {
     background-color: transparent !important;
     border: none !important;
     padding-left: 0 !important;
 }
 
-div.search-container {
+// Adjust vertical padding of search container
+.top-bar-container, .general-search-header{
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
+}
+
+div.search-container, nde-search-box-presenter {
 
     .search-bar-container > .flex-row {
         align-items: center;
@@ -205,7 +234,7 @@ div.search-container {
     .search_box_container {gap: 4px;}
 
     // Search form element styling
-    #search-dropdown-container-button-scopes-dropdown, #main-search-bar, button.search-btn {
+    #search-dropdown-container-button-scopes-dropdown, #search-dropdown-container-button-, #main-search-bar, button.search-btn {
         border-radius: 0px !important;
         height: 46px;
 
@@ -236,6 +265,11 @@ div.search-container {
 
 }
 
+// Child page search headers
+nde-general-search-header {
+    h1.title {display: none;}
+}
+
 //===============================================
 // FOOTERS (Libraries and Institute)
 //===============================================
@@ -245,8 +279,9 @@ footer {
 
     .wrapper {
         padding: 16px 0;
-        width: clamp(1088px,85%,1368px);
         margin: 0 auto;
+
+        @include applyPrimoContainerWidths;
     }
 
     .libraries-footer {
@@ -255,7 +290,8 @@ footer {
         .wrapper {
             background: url("https://cdn.mitlibrary.net/files/branding/local/vi-shape7-tp.svg") no-repeat 10% center;
             display: flex;
-            padding: 32px 0;
+            padding-top: 32px;
+            padding-bottom: 32px;
         }
 
         a.logo-mit-lib {
@@ -267,10 +303,14 @@ footer {
             
             display: flex;
             gap: 32px;
+            align-items: center;
 
             a {
                 color: $color-gray-300;
+                height: 1em;
+                line-height: 1em;
                 font-size: 0.9375rem;
+
                 @include text-decoration-animation;
 
                 &:hover {
@@ -300,4 +340,32 @@ footer {
         color: $color-gray-300;
         }
     }
+      
 }
+
+// Responsive behavior
+@media (max-width: 600px) {
+
+    footer .wrapper, .institute-bar .wrapper {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    footer .libraries-footer .wrapper {
+        flex-direction: column;
+        gap: 24px;
+    }
+}    
+
+@media (max-width: 450px) {
+    footer .libraries-footer .wrapper {
+        
+        nav {
+            flex-direction: column;
+            align-items: start;
+            gap: 16px;
+        }
+
+    }
+}  
+
