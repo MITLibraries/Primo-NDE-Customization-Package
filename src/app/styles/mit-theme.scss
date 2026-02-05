@@ -14,6 +14,358 @@ html {
 
 // Set default theme colors for NDE
 .custom-nde-theme {
-    @include mat.all-component-colors(m3-theme.$light-theme);
-    @include mat.system-level-colors(m3-theme.$light-theme);
+    // @include mat.all-component-colors(m3-theme.$light-theme);
+    // @include mat.system-level-colors(m3-theme.$light-theme);
 }
+
+// Helper to mimic Primo responsive container widths
+@mixin applyPrimoContainerWidths {
+    width: clamp(1088px,85%,1368px);
+
+    @media (min-width: 960px) and (max-width: 1279.98px) {
+        width: clamp(912px,85%,1088px);
+    }
+
+    @media only screen and (min-width: 600px) and (max-width: 959.98px) {
+        width: clamp(288px,88.42544317%,848px);
+    }
+    
+    @media only screen and (max-width: 599.98px) {
+        width: 100%;
+    }    
+}
+
+//===================
+// HELPERS
+//===================
+.sr {
+  border: 0 none;
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  word-wrap: normal;
+}
+
+//===================
+// MITL DS VARIABLES
+//===================
+$color-white: #fff;
+$color-black: #000;
+
+$color-gray-100: #F2F2F2;
+$color-gray-200: #e6e6e6;
+$color-gray-300: #ccc;
+$color-gray-400: #b3b3b3;
+$color-gray-500: #999;
+$color-gray-600: #808080;
+$color-gray-700: #666;
+$color-gray-900: #333;
+$color-gray-950: #1a1a1a;
+$color-gray-975: #191919;
+
+$color-red-600: #E50000;
+
+//===================
+// EFFECTS
+//===================
+@mixin hoverOutline {
+    outline: 2px solid $color-gray-600 !important;
+    outline-offset: 2px !important;
+}
+
+@mixin focusOutline {
+    outline: 2px solid #00C8FF !important;
+    outline-offset: 2px !important;
+}
+
+@mixin text-decoration-animation {
+    transition: text-decoration 150ms ease;
+    text-decoration: none; // Included as fallback if text-decoration-color isn't supported
+    text-decoration: underline transparent;
+}
+
+//===================
+// INSTITUTE BAR
+//===================
+
+.institute-bar {
+    background-color: $color-gray-900;
+        
+    .wrapper {
+        display: flex;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        margin: 0 auto;
+
+        @include applyPrimoContainerWidths;        
+
+        @media (max-width: 600px) {
+            padding-left: 16px;
+            padding-right: 16px;            
+        }
+    }
+
+    .link-logo-mit { height: 24px; } // Sets link around logo to match logo height
+
+    nav {
+        flex: 1;
+        display: flex;
+        gap: 24px;
+        justify-content: flex-end;
+
+        a {
+            color: $color-gray-300;
+            font-size: 1.5rem;
+            padding-top: 2px;
+            @include text-decoration-animation;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+}
+
+
+//===================
+// MAIN NAVIGATION
+//===================
+
+// Override Navigation Container
+.container[_ngcontent-ng-c1837336355] .top-bar[_ngcontent-ng-c1837336355] {
+    background-color: $color-gray-975 !important;
+    padding: 0 !important;
+}
+
+// Override Language Selector
+.lang-drop-down[_ngcontent-ng-c1893398133] .custom-lang-dropdown[_ngcontent-ng-c1893398133] {
+    color: $color-gray-400;
+}
+
+header.top-bar {
+
+    .header-container {
+        background: url("https://cdn.mitlibrary.net/files/branding/local/vi-shape7-tp.svg") no-repeat -48px -250px;
+        padding: 32px 0 !important;      
+        
+        .main-menu-container {
+            justify-content: flex-end;
+
+            ul {
+
+                li {
+
+                    a {
+                        color: $color-white;
+                        font-size: 1.125rem;
+                        text-transform: none;
+                        padding-left: 16px;
+                        padding-right: 16px;
+                    }
+
+                    mat-divider {
+                        display: none;
+                    }
+
+                    button.show-more-btn {
+                        color: $color-white;
+                    }
+
+                }
+
+            }
+
+        }
+
+        nde-user-panel {
+            flex-basis: auto !important;
+        }
+    }
+
+    .mat-icon svg path {
+        color: $color-gray-400;
+    }
+}
+
+//===============================================
+// SEARCH CONTAINERS (Homepage and Child Pages)
+//===============================================
+
+//Override homepage search container height
+.container[_ngcontent-ng-c1837336355] .custom-search-bar-container[_ngcontent-ng-c1837336355], .general-search-header[_ngcontent-ng-c1773182704] {
+    height: auto !important;
+}
+
+// Override search box wrapper
+.search-bar-container[_ngcontent-ng-c133002507] .search-bar-wrapper[_ngcontent-ng-c133002507], .search_box_container[_ngcontent-ng-c4036046928] {
+    background-color: transparent !important;
+    border: none !important;
+    padding-left: 0 !important;
+}
+
+// Adjust vertical padding of search container
+.top-bar-container, .general-search-header{
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
+}
+
+div.search-container, nde-search-box-presenter {
+
+    .search-bar-container > .flex-row {
+        align-items: center;
+    }
+
+    div.top-bar-background-image, .general-search-header-background {
+        background-image: none !important;
+        background-color: $color-black;
+
+        .background-overlay { background-color: $color-black !important;}        
+    }
+
+    .custom-search-bar-container > h2 {
+        display: none;
+    }
+    
+    .search_box_container {gap: 4px;}
+
+    // Search form element styling
+    #search-dropdown-container-button-scopes-dropdown, #search-dropdown-container-button-, #main-search-bar, button.search-btn {
+        border-radius: 0px !important;
+        height: 46px;
+
+        &:hover {
+            @include hoverOutline;
+        }
+
+        &:focus-visible {
+            @include focusOutline;
+        }
+    }
+
+    #search-dropdown-container-button-scopes-dropdown, #main-search-bar {
+        border: none;
+        background-color: $color-white;   
+        padding: 0 20px;
+    }
+
+    button.search-btn {
+        background-color: $color-red-600;
+        color: $color-white;
+        width: 46px;
+
+        svg {
+            fill: $color-white;
+        }
+    }
+
+}
+
+// Child page search headers
+nde-general-search-header {
+    h1.title {display: none;}
+}
+
+//===============================================
+// FOOTERS (Libraries and Institute)
+//===============================================
+
+footer {
+    letter-spacing: 0;
+
+    .wrapper {
+        padding: 16px 0;
+        margin: 0 auto;
+
+        @include applyPrimoContainerWidths;
+    }
+
+    .libraries-footer {
+        background-color: $color-gray-975;        
+
+        .wrapper {
+            background: url("https://cdn.mitlibrary.net/files/branding/local/vi-shape7-tp.svg") no-repeat 10% center;
+            display: flex;
+            padding-top: 32px;
+            padding-bottom: 32px;
+        }
+
+        a.logo-mit-lib {
+            height: 32px;
+            margin-right: 48px;
+        }
+
+        nav {
+            
+            display: flex;
+            gap: 32px;
+            align-items: center;
+
+            a {
+                color: $color-gray-300;
+                height: 1em;
+                line-height: 1em;
+                font-size: 0.9375rem;
+
+                @include text-decoration-animation;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+        }
+    }
+
+    .institute-footer {
+        background-color: $color-gray-900;
+        color: $color-gray-300;    
+        font-size: 0.75rem;
+
+        .wrapper {
+            display: flex;
+            gap: 32px;
+        }
+
+        .link-logo-mit img {
+            height: 24px;
+        }
+
+        a {
+        
+        color: $color-gray-300;
+        }
+    }
+      
+}
+
+// Responsive behavior
+@media (max-width: 600px) {
+
+    footer .wrapper, .institute-bar .wrapper {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    footer .libraries-footer .wrapper {
+        flex-direction: column;
+        gap: 24px;
+    }
+}    
+
+@media (max-width: 450px) {
+    footer .libraries-footer .wrapper {
+        
+        nav {
+            flex-direction: column;
+            align-items: start;
+            gap: 16px;
+        }
+
+    }
+}  
+
