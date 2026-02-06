@@ -16,7 +16,7 @@ export function injectLibchat() {
             console.error('Libchat script failed to load', scr.src, ev);
         };
         setTimeout(function () {
-            document.getElementsByTagName("body")[0].appendChild(scr);
+            document.body.appendChild(scr);
         }, 2000);
     } catch (e) {
         console.error('error injecting libchat', e)
