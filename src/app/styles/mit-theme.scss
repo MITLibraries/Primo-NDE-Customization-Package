@@ -220,9 +220,9 @@ div.search-container, nde-search-box-presenter {
         align-items: center;
     }
 
-    div.top-bar-background-image, .general-search-header-background {
+    div.top-bar-background-image, .general-search-header-background, nde-top-bar {
         background-image: none !important;
-        background-color: $color-black;
+        background-color: $color-black !important;
 
         .background-overlay { background-color: $color-black !important;}        
     }
@@ -260,6 +260,47 @@ div.search-container, nde-search-box-presenter {
 
         svg {
             fill: $color-white;
+        }
+    }
+
+    // Force elements to have white fills/text and be visible on dark background
+    button.advanced-search-button {
+        color: $color-white !important;
+
+        &:hover {
+            background-color: $color-gray-900 !important;
+        }
+
+        &:focus-visible {
+            @include focusOutline;
+        }
+    }
+
+    mat-icon path {
+        fill: $color-white !important;
+    }
+
+    // Fix clear button styling
+    div.search-bar-actions {
+    
+        mat-divider {
+            display: none !important;
+        }
+
+        > .clear-search-btn {
+            margin-right: 4px;
+            
+            &:hover {
+                background-color: $color-gray-900 !important;
+            }
+
+            &:focus-visible {
+                @include focusOutline;
+            }            
+
+            path {
+                fill: $color-white !important;
+            }
         }
     }
 
