@@ -153,6 +153,8 @@ header.top-bar {
         background: url("https://cdn.mitlibrary.net/files/branding/local/vi-shape7-tp.svg") no-repeat -48px -250px;
         padding: 32px 0 !important;      
         
+        > div.flex-row {margin-left: 0 !important;}
+
         .main-menu-container {
             justify-content: flex-end;
 
@@ -275,7 +277,7 @@ div.search-container, nde-search-box-presenter {
         }
     }
 
-    mat-icon path {
+    div.top-bar-container mat-icon path {
         fill: $color-white !important;
     }
 
