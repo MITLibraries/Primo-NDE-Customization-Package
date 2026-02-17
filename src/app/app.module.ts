@@ -7,6 +7,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { CommonModule } from '@angular/common';
 import { AutoAssetSrcDirective } from './services/auto-asset-src.directive';
 import { SHELL_ROUTER } from "./injection-tokens";
+import { loadLibChatWidget } from './utils/libchat';
 
 
 
@@ -32,6 +33,12 @@ export const AppModule = ({ providers, shellRouter }: { providers: any, shellRou
     }
 
     ngDoBootstrap(appRef: ApplicationRef) {
+      // Load chat widget first
+      loadLibChatWidget();
+      console.log('loading libchat')
+
+
+      // Then register web components
       for (const [key, value] of selectorComponentMap) {
         const customElement = createCustomElement(value, { injector: this.injector });
         this.webComponentSelectorMap.set(key, customElement);
@@ -48,4 +55,3 @@ export const AppModule = ({ providers, shellRouter }: { providers: any, shellRou
   }
   return AppModule
 }
-
