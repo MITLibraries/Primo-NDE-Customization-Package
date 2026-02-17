@@ -137,13 +137,13 @@ $color-red-600: #E50000;
 //===================
 
 // Override Navigation Container
-.container[_ngcontent-ng-c1837336355] .top-bar[_ngcontent-ng-c1837336355] {
+.container .top-bar {
     background-color: $color-gray-975 !important;
     padding: 0 !important;
 }
 
 // Override Language Selector
-.lang-drop-down[_ngcontent-ng-c1893398133] .custom-lang-dropdown[_ngcontent-ng-c1893398133] {
+.lang-drop-down .custom-lang-dropdown {
     color: $color-gray-400;
 }
 
@@ -198,12 +198,14 @@ header.top-bar {
 //===============================================
 
 //Override homepage search container height
-.container[_ngcontent-ng-c1837336355] .custom-search-bar-container[_ngcontent-ng-c1837336355], .general-search-header[_ngcontent-ng-c1773182704] {
+.container .custom-search-bar-container,
+.general-search-header {
     height: auto !important;
 }
 
 // Override search box wrapper
-.search-bar-container[_ngcontent-ng-c133002507] .search-bar-wrapper[_ngcontent-ng-c133002507], .search_box_container[_ngcontent-ng-c4036046928] {
+.search-bar-container .search-bar-wrapper,
+.search_box_container {
     background-color: transparent !important;
     border: none !important;
     padding-left: 0 !important;
