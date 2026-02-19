@@ -464,7 +464,9 @@ footer {
 // PAGE SPECIFIC FIXES
 //===============================================
 
-// Search results pages
+// SEARCH RESULTS LIST
+
+// Title styling 
 nde-record-title {
     a {
         @include underlinedLinks;
@@ -485,8 +487,47 @@ nde-record-title {
     }
 }
 
-// My Library Activity page (under profile when logged in)
+// Button styling for record availability
+nde-record-availability {
 
+    button {
+        border: 1px solid $color-blue-500 !important;
+        border-radius: 0 !important;
+        color: $color-text-primary !important;
+        font-weight: 500 !important;
+
+        &:hover {
+            background-color: $color-blue-25 !important;
+            color: $color-blue-500 !important;
+        }
+
+        &:focus-visible {
+        @include focusOutline;
+        }
+    }
+
+    span.ti-dropdown {
+        mat-select {
+            border: 1px solid $color-blue-500 !important;
+            border-left: none !important;
+            border-radius: 0 !important;     
+
+            &:hover {
+                background-color: $color-blue-25 !important;
+
+                svg path {fill: $color-blue-500 !important;}
+            }            
+
+            svg path {
+                fill: $color-text-primary !important;
+            }            
+        }
+    }
+}
+
+// MY LIBRARY ACTIVITY PAGE (under profile when logged in)
+
+// Active link styling on left navigation
 .account-menu-container a.active-link {
     border: 1px solid $color-gray-900 !important;
     background-color: $color-gray-200 !important;
