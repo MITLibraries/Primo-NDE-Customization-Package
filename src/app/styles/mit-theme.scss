@@ -466,6 +466,27 @@ footer {
 
 // SEARCH RESULTS LIST
 
+// Filter button styling
+nde-quick-filters {
+
+    > .flex-row {
+        gap: 4px !important;
+    }
+
+    button {
+        border: 1px solid $color-gray-600 !important;
+        border-radius: 0 !important;
+        color: $color-text-primary !important;
+        font-weight: 500 !important;
+
+        &.quick-filter-btn-active.mdc-button {
+            background-color: $color-gray-200 !important;
+            border-color: $color-gray-900 !important;
+        }
+    }
+
+}
+
 // Title styling 
 nde-record-title {
     a {
