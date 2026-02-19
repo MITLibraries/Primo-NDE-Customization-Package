@@ -18,6 +18,10 @@ html {
     // @include mat.system-level-colors(m3-theme.$light-theme);
 }
 
+//===================
+// HELPERS
+//===================
+
 // Helper to mimic Primo responsive container widths
 @mixin applyPrimoContainerWidths {
     width: clamp(1088px,85%,1368px);
@@ -35,9 +39,6 @@ html {
     }    
 }
 
-//===================
-// HELPERS
-//===================
 .sr {
   border: 0 none;
   clip: rect(1px, 1px, 1px, 1px);
@@ -49,6 +50,32 @@ html {
   width: 1px;
   word-wrap: normal;
 }
+
+// Helper to style links to match MITL DS
+@mixin underlinedLinks {
+  color: inherit;
+  font-weight: inherit;
+  text-decoration: underline;
+  text-decoration-color: $color-blue-500;
+  text-underline-offset: 0.5rem;  
+
+  &:hover {
+    color: $color-blue-500;
+  }
+}
+
+@mixin underlinedNavLinks {
+  color: $color-white;
+  font-weight: inherit;
+  text-decoration: underline;
+  text-decoration-color: $color-red-500;
+  text-underline-offset: 0.5rem;  
+
+  &:hover {
+    color: $color-red-500;
+  }
+}
+
 
 //===================
 // MITL DS VARIABLES
@@ -67,7 +94,11 @@ $color-gray-900: #333;
 $color-gray-950: #1a1a1a;
 $color-gray-975: #191919;
 
+$color-red-500: #ff0000;
 $color-red-600: #E50000;
+
+$color-blue-25: #F0F0FF;
+$color-blue-500: #0000FF;
 
 //===================
 // EFFECTS
@@ -167,6 +198,22 @@ header.top-bar {
                         text-transform: none;
                         padding-left: 16px;
                         padding-right: 16px;
+
+                        @include underlinedNavLinks;
+
+                        &.selected-page {
+                            text-decoration-color: $color-gray-600;
+                            text-decoration-thickness: 2px;
+
+                            &:hover {
+                                color: $color-white;
+                                text-decoration-color: $color-gray-600 !important;
+                                text-decoration-thickness: 2px; 
+                                outline: none;
+
+                                .mdc-button__label {text-decoration: none !important;}
+                            }
+                        }
                     }
 
                     mat-divider {
