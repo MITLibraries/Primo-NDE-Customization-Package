@@ -53,10 +53,8 @@ html {
 
 // Helper to style links to match MITL DS
 @mixin underlinedLinks {
-  color: inherit;
-  font-weight: inherit;
-  text-decoration: underline;
-  text-decoration-color: $color-blue-500;
+  text-decoration: underline !important;
+  text-decoration-color: $color-blue-500 !important;
   text-underline-offset: 0.5rem;  
 
   &:hover {
@@ -66,7 +64,6 @@ html {
 
 @mixin underlinedNavLinks {
   color: $color-white;
-  font-weight: inherit;
   text-decoration: underline;
   text-decoration-color: $color-red-500;
   text-underline-offset: 0.5rem;  
@@ -466,6 +463,27 @@ footer {
 //===============================================
 // PAGE SPECIFIC FIXES
 //===============================================
+
+// Search results pages
+nde-record-title {
+    a {
+        @include underlinedLinks;
+        margin-bottom: 8px;         
+
+        &.record-title span, nde-highlight span {
+            font-size: 1.35rem !important;
+            color: $color-text-primary !important;
+            line-height: 1.3 !important;
+            font-weight: 500 !important;
+        }
+
+        &:hover {
+            span, nde-highlight span {
+                color: $color-blue-500 !important;
+            }
+        }
+    }
+}
 
 // My Library Activity page (under profile when logged in)
 
