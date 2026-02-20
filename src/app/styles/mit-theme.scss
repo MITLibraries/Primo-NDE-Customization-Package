@@ -55,7 +55,7 @@ html {
 @mixin underlinedLinks {
   text-decoration: underline !important;
   text-decoration-color: $color-blue-500 !important;
-  text-underline-offset: 0.5rem;  
+  text-underline-offset: 0.25rem;  
 
   &:hover {
     color: $color-blue-500;
