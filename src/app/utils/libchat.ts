@@ -1,24 +1,24 @@
-/* 
-* This function injects the libanswers <script> for libchat into the current document. 
-* This function is called by src/bootstrap.ts.  
-*/
+/**
+ * Loads the MIT LibChat widget into the page
+ * Includes duplicate check to prevent multiple instances
+ */
+export function loadLibChatWidget(): void {
+  const LIBCHAT_HASH = '1e8f3119e6cff530e0d23e2cb1f2b2a7';
 
-export function injectLibchat() {
-    try {
-        var libchatHash = "1e8f3119e6cff530e0d23e2cb1f2b2a7";
-        var div = document.createElement("div");
-        div.id = "libchat_" + libchatHash;
-        document.getElementsByTagName("body")[0].appendChild(div);
-        var scr = document.createElement("script");
-        scr.src = "https://libanswers.mit.edu/load_chat.php?hash=" + libchatHash;
-        // we added this error handling to the libanswers-provided script for libchat
-        scr.onerror = (ev) => {
-            console.error('Libchat script failed to load', scr.src, ev);
-        };
-        setTimeout(function () {
-            document.getElementsByTagName("body")[0].appendChild(scr);
-        }, 2000);
-    } catch (e) {
-        console.error('error injecting libchat', e)
-    }
+  // Check if LibChat is already loaded
+  if (document.getElementById(`libchat_${LIBCHAT_HASH}`)) {
+    console.log('LibChat widget already loaded');
+    return;
+  }
+
+  // Create the libchat div
+  const div = document.createElement('div');
+  div.id = `libchat_${LIBCHAT_HASH}`;
+  document.body.appendChild(div);
+
+  // Load the libchat script
+  const script = document.createElement('script');
+  script.src = `https://libanswers.mit.edu/load_chat.php?hash=${LIBCHAT_HASH}`;
+  document.body.appendChild(script);
+  console.log('LibChat widget loaded');
 }
