@@ -90,6 +90,36 @@ html {
     }
 }
 
+// Mixin to further override links that should look like links
+@mixin overrideLinksToLinks {
+    color: $color-text-primary !important;
+    @include underlinedLinks;
+
+    &:hover {
+        > .mat-mdc-button-persistent-ripple::before {opacity: 0 !important;}
+        
+        color: $color-blue-500 !important;
+    }
+}
+
+// Mixin to overrde buttons that should appear like links
+@mixin overrideButtonsToLinks {
+    color: $color-text-primary !important;
+    text-decoration: underline !important;
+    text-decoration-color: $color-blue-500 !important;
+    text-underline-offset: 0.25rem;      
+
+    .mdc-button__label > span {
+        overflow: visible !important ;
+    }
+
+    &:hover {
+        > .mat-mdc-button-persistent-ripple::before {opacity: 0 !important;}
+        
+        color: $color-blue-500 !important;
+    }
+}
+
 //===================
 // MITL DS VARIABLES
 //===================
@@ -559,6 +589,25 @@ nde-record-availability {
             color: $color-blue-500 !important;
             text-decoration-color: $color-blue-500 !important;
         }
+    }
+}
+
+
+// RESULT PAGE
+// Updating buttons to DS styles
+nde-request-card mat-card-actions{
+    button {
+        @include secondaryButton;
+    }
+
+    a.go-to-link-button {
+        @include overrideLinksToLinks;
+    }
+}
+
+nde-location-items-requests {
+    button {
+        @include overrideButtonsToLinks;
     }
 }
 
