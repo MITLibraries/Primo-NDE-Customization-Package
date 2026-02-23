@@ -73,6 +73,22 @@ html {
   }
 }
 
+@mixin secondaryButton {
+    background-color: $color-white !important;
+    border: 1px solid $color-blue-500 !important;
+    border-radius: 0 !important;
+    color: $color-text-primary !important;
+    font-weight: 500 !important;
+
+    &:hover {
+        background-color: $color-blue-25 !important;
+        color: $color-blue-500 !important;
+    }
+
+    &:focus-visible {
+        @include focusOutline;
+    }
+}
 
 //===================
 // MITL DS VARIABLES
@@ -514,19 +530,7 @@ nde-record-title {
 nde-record-availability {
 
     button:not(.available-at-button) {
-        border: 1px solid $color-blue-500 !important;
-        border-radius: 0 !important;
-        color: $color-text-primary !important;
-        font-weight: 500 !important;
-
-        &:hover {
-            background-color: $color-blue-25 !important;
-            color: $color-blue-500 !important;
-        }
-
-        &:focus-visible {
-        @include focusOutline;
-        }
+        @include secondaryButton;
     }
 
     span.ti-dropdown mat-select, button.mat-mdc-menu-trigger{
@@ -555,6 +559,18 @@ nde-record-availability {
             color: $color-blue-500 !important;
             text-decoration-color: $color-blue-500 !important;
         }
+    }
+}
+
+// CITATION SEARCH PAGE
+// Submit button
+form .buttons-container-wrapper button[type="submit"] {
+    @include secondaryButton;
+
+    &.mat-mdc-button-disabled {
+        background-color: $color-white !important;
+        border-color: $color-gray-400 !important;
+        color: $color-gray-400 !important;
     }
 }
 
