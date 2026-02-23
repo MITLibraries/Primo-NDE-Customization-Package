@@ -611,6 +611,18 @@ nde-location-items-requests {
     }
 }
 
+nde-location-item-service-button {
+    button {
+        @include overrideButtonsToLinks;
+    }
+}
+
+#item-level-request-msg {
+    button {
+        @include overrideButtonsToLinks;
+    }
+}
+
 // CITATION SEARCH PAGE
 // Submit button
 form .buttons-container-wrapper button[type="submit"] {
