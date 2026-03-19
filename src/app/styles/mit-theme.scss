@@ -626,6 +626,13 @@ nde-location-item-service-button {
     }
 }
 
+// Natural Language Search Icon color override
+mat-icon[data-mat-icon-name="natural-language-search"] {
+    path {
+        fill: #FF99FF !important;
+    }
+}
+
 // CITATION SEARCH PAGE
 // Submit button
 form .buttons-container-wrapper button[type="submit"] {
