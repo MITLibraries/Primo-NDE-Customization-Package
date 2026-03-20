@@ -55,10 +55,10 @@ html {
 @mixin underlinedLinks {
   text-decoration: underline !important;
   text-decoration-color: $color-blue-500 !important;
-  text-underline-offset: 0.25rem;  
+  text-underline-offset: 0.25rem !important;  
 
   &:hover {
-    color: $color-blue-500;
+    color: $color-blue-500 !important;
   }
 }
 
@@ -151,6 +151,9 @@ $color-text-secondary: $color-gray-700;
 $color-text-placeholder: $color-gray-500;
 $color-text-disabled: $color-gray-400;
 $color-text-oncolor: $color-white;
+
+// BORDER
+$color-border-default: $color-gray-400;
 
 //===================
 // EFFECTS
@@ -623,6 +626,13 @@ nde-location-item-service-button {
     }
 }
 
+// Natural Language Search Icon color override
+mat-icon[data-mat-icon-name="natural-language-search"] {
+    path {
+        fill: #FF99FF !important;
+    }
+}
+
 // CITATION SEARCH PAGE
 // Submit button
 form .buttons-container-wrapper button[type="submit"] {
@@ -643,4 +653,58 @@ form .buttons-container-wrapper button[type="submit"] {
     background-color: $color-gray-200 !important;
     border-radius: 0 1.25rem 1.25rem 0 !important;
     color: $color-text-primary !important;
+}
+
+// CUSTOM HOMEPAGE STYLING
+main.main-landing-page {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    h2 {
+        font-size: 32px;
+        font-weight: 600;
+    }
+
+    div.columns {
+        display: flex;
+        gap: 32px;
+
+        div.column {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+
+            > div {
+                border: 2px solid $color-border-default;
+                padding: 28px 32px; 
+                
+                h3 {
+                    font-size: 24px;
+                    font-weight: 600;
+                    line-height: 1.2;
+                    margin-bottom: 12px !important;
+                }
+
+                a {
+                    color: $color-text-primary;
+                    font-weight: 500;
+                    @include underlinedLinks;
+                }
+
+                ul {
+                    list-style: disc outside;
+                    margin-left: 16px !important;
+
+                    li {margin-bottom: 8px;}
+                }
+            }
+        }        
+
+        @media only screen and (min-width: 600px) and (max-width: 959.98px) {
+            flex-direction: column;
+        }        
+
+    }
+
 }
