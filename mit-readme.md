@@ -17,7 +17,7 @@ For style and markup changes, testing locally in the dev environment is usually 
 1. Clone this repository from GitHub (or just `git pull origin [new-nde-changes]` if you already have our NDE development environment installed locally)
 2. If not already installed, install the NDE development environment following the instructions in README.md
 3. Switch to the branch being tested `git checkout [new-nde-changes]`
-4. Run the development server with proxy, following the instructions in README.md and confirm the changes work as expected
+4. Run the development server with proxy `npm run start:proxy`, following the instructions in README.md and confirm the changes work as expected
 
 ## Testing changes by deploying to Primo testing environment as part of code review - An Alma Admin with access to Discovery Configuration must take these steps
 In some cases it may be desireable to test changes in a production-like environment in addition to the local dev environment.
