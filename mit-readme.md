@@ -12,22 +12,29 @@
 3. Push a branch with your changes to our GitHub repository and open a PR to merge that branch into `mit-main` and request a review
 4. Once your PR is reviewed and approved, merge your changes into `mit-main`
 
-## Testing changes as part of code review - An Alma Admin with access to Discovery Configuration must take these steps
+## Testing changes in a local development environment as part of code review
+For style and markup changes, testing locally in the dev environment is usually sufficient
+1. Clone this repository from GitHub (or just `git pull origin [new-nde-changes]` if you already have our NDE development environment installed locally)
+2. If not already installed, install the NDE development environment following the instructions in README.md
+3. Switch to the branch being tested `git checkout [new-nde-changes]`
+4. Run the development server with proxy, following the instructions in README.md and confirm the changes work as expected
+
+## Testing changes by deploying to Primo testing environment as part of code review - An Alma Admin with access to Discovery Configuration must take these steps
+In some cases it may be desireable to test changes in a production-like environment in addition to the local dev environment.
 1. Clone this repository from GitHub (or just `git pull origin [new-nde-changes]` if you already have our NDE development environment installed locally)
 2. If not already installed, install the NDE development environment following the instructions in README.md
 3. Switch to the branch being tested `git checkout [new-nde-changes]`
 4. **IMPORTANT** - In `build-settings.env` set `VIEW_ID=NDE_DEV`
-5. Run the build command `npm run build` following the instructions in README.MD. 
+5. Run the build command `npm run build` following the instructions in README.md. 
 6. As a result of running the build command a new .zip file containing a Primo Customization Package will be created in `/dist`
 7. Upload the .zip file to the `NDE_DEV` view via the Alma admin interface following the instructions at https://knowledge.exlibrisgroup.com/Primo/Product_Documentation/020Primo_VE/Primo_VE_(English)/050Display_Configuration/010Configuring_Discovery_Views_for_Primo_VE#Managing_Customization_Packages
 8. Test the changes at https://mit.primo.exlibrisgroup.com/nde/home?vid=01MIT_INST:NDE_DEV 
-
 
 ## Deploying to our production NDE view - An Alma Admin with access to Discovery Configuration must take these steps
 1. Clone this repository from GitHub (or just `git pull origin mit-main` if you already have a local copy of our NDE development environment installed)
 2. If not already installed, install the NDE development environment following the instructions in README.md
 3. switch to the production branch `git checkout mit-main`
-4. Run the build command `npm run build` following the instructions in README.MD 
+4. Run the build command `npm run build` following the instructions in README.md 
 5. As a result of running the build command a new .zip file representing a Primo Customization Package will land in `/dist`
 6. Upload the .zip file to production NDE view via the Alma admin interface following the instructions at https://knowledge.exlibrisgroup.com/Primo/Product_Documentation/020Primo_VE/Primo_VE_(English)/050Display_Configuration/010Configuring_Discovery_Views_for_Primo_VE#Managing_Customization_Packages
 
@@ -40,8 +47,11 @@ Note that our `main` branch tracks the upstream `main` branch:
 
 1. Sync our `main` branch in GitHub using the `sync fork` button 
 2. Assuming the NDE development environment is running locally, `git pull origin main` to pull down our local copy of the upstream `main`
-3. Confirm that the upstream changes haven't broken anything
-4. Open a PR to merge our `main` into our `mit-main` 
-5. Follow steps above for testing and deploying to production
+3. `git checkout mit-main` and make sure you have the most recent commits `git pull origin mit-main`
+4. Create a temporary local branch e.g. `git checkout -B test-upstream-changes`
+5. `git merge main` and confirm that the upstream changes haven't broken anything.
+6. Delete your temporary branch
+7. Open a PR to merge our `main` into our `mit-main` 
+8. Follow steps above for testing and deploying to production
 
 
