@@ -1,7 +1,7 @@
 # GitHub Repository configurations
 ## Special Branches
 * `mit-main` is our default branch and contains our production code
-  * Pushing directly to `main` is disabled by a branch protection rule
+  * Pushing directly to `mit-main` is disabled by a branch protection rule
 * `main` tracks the forked upstream repository's `main` branch at https://github.com/ExLibrisGroup/customModule/tree/main
   * See instructions below for syncing with the forked repository
 
