@@ -17,7 +17,6 @@ export const selectSearchTerm = createSelector(
   imports: [],
   templateUrl: './no-results.component.html',
   styleUrl: './no-results.component.scss',
-  encapsulation: ViewEncapsulation.None,
 })
 export class NoResultsComponent {
   private store = inject(Store);
