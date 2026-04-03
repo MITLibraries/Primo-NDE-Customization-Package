@@ -120,6 +120,31 @@ html {
     }
 }
 
+@mixin borderedBoxes {
+    border: 2px solid $color-border-default;
+    padding: 28px 32px; 
+    
+    h3 {
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 1.2;
+        margin-bottom: 12px !important;
+    }
+
+    a {
+        color: $color-text-primary;
+        font-weight: 500;
+        @include underlinedLinks;
+    }
+
+    ul {
+        list-style: disc outside;
+        margin-left: 16px !important;
+
+        li {margin-bottom: 8px;}
+    }
+}
+
 //===================
 // MITL DS VARIABLES
 //===================
@@ -676,28 +701,7 @@ main.main-landing-page {
             gap: 32px;
 
             > div {
-                border: 2px solid $color-border-default;
-                padding: 28px 32px; 
-                
-                h3 {
-                    font-size: 24px;
-                    font-weight: 600;
-                    line-height: 1.2;
-                    margin-bottom: 12px !important;
-                }
-
-                a {
-                    color: $color-text-primary;
-                    font-weight: 500;
-                    @include underlinedLinks;
-                }
-
-                ul {
-                    list-style: disc outside;
-                    margin-left: 16px !important;
-
-                    li {margin-bottom: 8px;}
-                }
+                @include borderedBoxes;
             }
         }        
 
@@ -707,4 +711,12 @@ main.main-landing-page {
 
     }
 
+}
+
+// NO RESULTS PAGE STYLING
+section.no-results-content {
+    > div {
+        @include borderedBoxes;
+        color: $color-text-primary !important;       
+    } 
 }

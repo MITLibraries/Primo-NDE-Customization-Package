@@ -1,28 +1,32 @@
-<div>
-  <h2>Oops, no records found! Let's keep digging...</h2>
-  <p>No Results matching "{{searchTerm()}}". Is the spelling correct?</p></div>
-<div>
-  <H2>More Options:</H2>
-  <h3>Articles</h3>
-    <p>Request via <a href="https://libraries.mit.edu/illiad">ILB/ILLiad</a></p>
-  <h3>Books, physical materials</h3>
-      <p>Request via BorrowDirect/InterLibrary Borrowing (ILB) by finding the item in 
-      <a [href]="worldcatUrl()" target="_blank">WorldCat</a></p>
-  <h3>Try these other specialized search tools</h3>
-  <ul>
-    <li><a href="https://libguides.mit.edu/az.php">A-Z Databases</a>: Browse or search for databases.</li>
-    <li><a href="http://archnet.org/">Archnet</a>: Architecture, design, and conservation issues related to the Muslim world.</li>
-    <li><a href="http://archivesspace.mit.edu/">ArchivesSpace</a>: Archives and manuscripts in our Distinctive Collections.</li>
-    <li><a href="https://libraries.mit.edu/dspace">DSpace&#64;MIT</a>: MIT theses, articles and other research materials.</li>
-    <li><a href="https://libraries.mit.edu/dome">Dome</a>: MIT Libraries' digital collections - images, media, maps, and more.</li>
-    <li><a href="https://geodata.libraries.mit.edu/">GeoData</a>: GIS/spatial data available at MIT.</li>
-    <li><a href="https://libraries.mit.edu/experts">Subject guides</a>: Created by our librarians for targeted research by subject.</li>
-  </ul>
-  <h3>Need help?</h3>
-  <p>
-    <a href="https://libraries.mit.edu/ask">Ask us</a> for more help!
-  </p>
-  <p>
-    You may also <a href="https://libraries.mit.edu/suggest-purchase">Suggest a purchase</a>.
-  </p>
-</div>
+<section class="no-results-content">
+  <h2>No results were found</h2>
+  <p>No Results matching "{{searchTerm()}}". Is the spelling correct?</p>
+  <div>
+    <h2 class="eyebrow">More options</h2>
+    <div class="wrapper">
+      <div>
+        <h3>Specialized search tools</h3>
+        <ul>
+          <li><a href="https://libguides.mit.edu/az.php">A-Z Databases</a>: Browse or search for databases.</li>
+          <li><a href="http://archnet.org/">Archnet</a>: Architecture, design, and conservation issues related to the Muslim world.</li>
+          <li><a href="http://archivesspace.mit.edu/">ArchivesSpace</a>: Archives and manuscripts in our Distinctive Collections.</li>
+          <li><a href="https://libraries.mit.edu/dspace">DSpace&#64;MIT</a>: MIT theses, articles and other research materials.</li>
+          <li><a href="https://libraries.mit.edu/dome">Dome</a>: MIT Libraries' digital collections - images, media, maps, and more.</li>
+          <li><a href="https://geodata.libraries.mit.edu/">GeoData</a>: GIS/spatial data available at MIT.</li>
+          <li><a href="https://libraries.mit.edu/experts">Subject guides</a>: Created by our librarians for targeted research by subject.</li>
+        </ul>
+      </div>
+            <div>
+        <h3>For articles</h3>
+          <p>Request via <a href="https://libraries.mit.edu/illiad">ILB/ILLiad</a></p>
+        <h3>For books and physical materials</h3>
+            <p>Request via BorrowDirect/InterLibrary Borrowing (ILB) by finding the item in 
+            <a [href]="worldcatUrl()" target="_blank">WorldCat</a></p>
+        <h3>Need help?</h3>
+        <p>
+          <a href="https://libraries.mit.edu/ask">Ask us</a> for more help! You may also <a href="https://libraries.mit.edu/suggest-purchase">Suggest a purchase</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

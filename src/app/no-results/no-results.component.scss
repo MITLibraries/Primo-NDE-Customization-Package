@@ -1,0 +1,38 @@
+h2 {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: 8px !important;
+
+  &.eyebrow {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    padding-bottom: 16px;
+  }
+}
+
+p {
+  margin-bottom: 24px;
+}
+
+ul {
+  margin-bottom: 0px !important;
+}
+
+div.wrapper {
+  display: flex;
+  gap: 48px;
+
+  @media only screen and (max-width: 959.98px) {
+      flex-direction: column;
+      gap: 20px;
+  } 
+}
+
+@media only screen and (max-width: 600px) {
+  section.no-results-content {
+    padding: 0 20px;
+  }
+} 
