@@ -621,6 +621,11 @@ nde-record-availability {
 
 
 // RESULT PAGE
+// Remove underline of result titles on result page
+nde-full-display-container nde-record-title h3 a {
+    text-decoration: none !important;
+}
+
 // Updating buttons to DS styles
 nde-request-card mat-card-actions{
     button {
