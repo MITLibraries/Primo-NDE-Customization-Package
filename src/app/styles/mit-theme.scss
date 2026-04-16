@@ -684,6 +684,10 @@ nde-location .getit-location-card button {
     span{
         color: $color-text-primary !important;
         font-weight: 400 !important;
+
+        &:hover {
+            color: $color-blue-500 !important;
+        }
     }
     
 }
