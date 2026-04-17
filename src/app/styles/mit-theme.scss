@@ -62,6 +62,18 @@ html {
   }
 }
 
+@mixin underlinedSubtleLinks {
+  color: $color-text-primary !important;
+  text-decoration: underline !important;
+  text-decoration-color: $color-gray-300 !important;
+  text-underline-offset: 0.25rem !important;  
+
+  &:hover {
+    color: $color-blue-500 !important;
+    text-decoration-color: $color-blue-500 !important;
+  }
+}
+
 @mixin underlinedNavLinks {
   color: $color-white;
   text-decoration: underline;
@@ -563,6 +575,18 @@ nde-quick-filters {
 
 }
 
+// Filter row styliing
+// All filters button
+div.filters-container #allFilterToggleButton {
+    @include overrideLinksToLinks();
+}
+
+// Sort by dropdown link styling
+div.filters-container button[aria-label="Sort by Relevance"] {
+    @include overrideLinksToLinks();
+}
+
+
 // Title styling 
 nde-record-title {
     a {
@@ -622,6 +646,11 @@ nde-record-availability {
 
 
 // RESULT PAGE
+// Remove underline of result titles on result page
+nde-full-display-container nde-record-title h3 a {
+    text-decoration: none !important;
+}
+
 // Updating buttons to DS styles
 nde-request-card mat-card-actions{
     button {
@@ -651,6 +680,48 @@ nde-location-item-service-button {
     }
 }
 
+nde-login {
+    button {
+        @include overrideButtonsToLinks;
+    }
+}
+
+// Styling accordion content links
+mat-expansion-panel .mat-expansion-panel-content .mat-expansion-panel-body {
+    a {
+        @include underlinedSubtleLinks;
+    }
+}
+
+nde-view-it-section button.view-it-card-no-license-container .icon-and-link-container {
+    @include overrideButtonsToLinks;
+    h5 {
+        color: $color-text-primary !important;
+
+        &:hover {
+            color: $color-blue-500 !important;
+        }
+    }
+}
+
+button[data-qa="view-it-section-show-more-or-show-less"] {
+    @include overrideButtonsToLinks;
+}
+
+nde-location .getit-location-card button {
+    @include overrideButtonsToLinks;
+
+    span{
+        color: $color-text-primary !important;
+        font-weight: 400 !important;
+
+        &:hover {
+            color: $color-blue-500 !important;
+        }
+    }
+    
+}
+
 // Natural Language Search Icon color override
 mat-icon[data-mat-icon-name="natural-language-search"] {
     path {
@@ -659,6 +730,11 @@ mat-icon[data-mat-icon-name="natural-language-search"] {
 }
 
 // CITATION SEARCH PAGE
+// Reset Form button
+form .buttons-container-wrapper button[data-qa="reset button"] {
+    @include overrideLinksToLinks();
+}
+
 // Submit button
 form .buttons-container-wrapper button[type="submit"] {
     @include secondaryButton;
@@ -668,6 +744,17 @@ form .buttons-container-wrapper button[type="submit"] {
         border-color: $color-gray-400 !important;
         color: $color-gray-400 !important;
     }
+}
+
+// JOURNAL SEARCH PAGE
+nde-journal-database-layout-component {
+    padding-bottom: 40px;
+}
+
+// Category list links
+nde-categories mat-tree-node {
+    @include underlinedLinks();
+    color: $color-text-primary !important;
 }
 
 // MY LIBRARY ACTIVITY PAGE (under profile when logged in)
