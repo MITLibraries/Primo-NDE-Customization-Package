@@ -369,8 +369,10 @@ div.search-container, nde-search-box-presenter {
         .background-overlay { background-color: $color-black !important;}        
     }
 
-    .custom-search-bar-container > h2 {
-        display: none;
+    .custom-search-bar-container {
+        > h1, > h2 {
+            display: none;
+        } 
     }
     
     .search_box_container {gap: 4px;}
