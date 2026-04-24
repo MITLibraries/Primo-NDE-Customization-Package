@@ -270,6 +270,19 @@ $color-border-default: $color-gray-400;
     color: $color-gray-400;
 }
 
+// Style adjustments to logo to handle site title
+nde-logo {
+    flex-basis: 87px;
+    padding-right: 24px;
+}
+@media (max-width: 600px) {
+    nde-logo + ng-component.ng-star-inserted {
+        order: 2;
+    }
+}
+
+
+// Header styles
 header.top-bar {
 
     .header-container {

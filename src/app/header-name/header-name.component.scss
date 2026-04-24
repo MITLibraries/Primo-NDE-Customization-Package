@@ -1,0 +1,18 @@
+h1 {
+  border-left: 1px solid #666;
+  height: 28px;
+  padding-left: 24px;
+  line-height: 4px;
+
+  a {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 28px;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+  }
+}
