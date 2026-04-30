@@ -2,6 +2,7 @@ import { Component, inject, computed } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { TranslateModule } from '@ngx-translate/core';
 
 // State shape for the View feature in the store
 type ViewConfigState = { config: { vid: string } };
@@ -19,7 +20,7 @@ export const selectVid = createSelector(
 @Component({
   selector: 'custom-header-name',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './header-name.component.html',
   styleUrl: './header-name.component.scss',
 })
