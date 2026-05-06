@@ -108,7 +108,7 @@
 							"src/assets"
 						],
 						"styles": [
-							"src/styles.scss"
+							"src/app/styles/mit-theme.scss"
 						],
 						"scripts": []
 					}
