@@ -18,13 +18,13 @@ export const selectVid = createSelector(
 );
 
 @Component({
-  selector: 'custom-header-name',
+  selector: 'custom-primo-branded-name',
   standalone: true,
   imports: [TranslateModule],
-  templateUrl: './header-name.component.html',
-  styleUrl: './header-name.component.scss',
+  templateUrl: './primo-branded-name.component.html',
+  styleUrl: './primo-branded-name.component.scss',
 })
-export class HeaderNameComponent {
+export class PrimoBrandedNameComponent {
   private store = inject(Store);
   vid = toSignal(this.store.select(selectVid), { initialValue: '' });
   url = computed(() => `home?vid=${this.vid()}&lang=en`);

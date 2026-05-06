@@ -1,23 +1,34 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HeaderNameComponent } from './header-name.component';
+import { PrimoBrandedNameComponent } from './primo-branded-name.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { By } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
+import { of } from 'rxjs';
 
 // Initial state for the mock store
 const initialState = { viewConfig: { config: { vid: 'TESTVID' } } };
 
-describe('HeaderNameComponent', () => {
-  let component: HeaderNameComponent;
-  let fixture: ComponentFixture<HeaderNameComponent>;
+describe('PrimoBrandedNameComponent', () => {
+  let component: PrimoBrandedNameComponent;
+  let fixture: ComponentFixture<PrimoBrandedNameComponent>;
   let store: MockStore;
 
   beforeEach(async () => {
     // Configure the testing module for the component
     await TestBed.configureTestingModule({
-      imports: [HeaderNameComponent], // Import the standalone component
+      imports: [PrimoBrandedNameComponent], // Import the standalone component
       providers: [
         // Provide a mock store with the initial state for testing
         provideMockStore({ initialState }),
+        {
+          provide: TranslateService,
+          useValue: {
+            get: (key: string) => of(key),
+            onLangChange: of({}),
+            onTranslationChange: of({}),
+            onDefaultLangChange: of({}),
+          },
+        },
       ],
     }).compileComponents();
 
@@ -25,7 +36,7 @@ describe('HeaderNameComponent', () => {
     store = TestBed.inject(MockStore);
 
     // Create the component fixture and instance
-    fixture = TestBed.createComponent(HeaderNameComponent);
+    fixture = TestBed.createComponent(PrimoBrandedNameComponent);
     component = fixture.componentInstance;
 
     // Trigger initial data binding and change detection
