@@ -21,4 +21,4 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: npm test -- --no-watch --browsers=ChromeHeadless --reporters=verbose
+        run: npm test -- --no-watch --browsers=ChromeHeadless
