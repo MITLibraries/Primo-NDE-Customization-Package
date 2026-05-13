@@ -1,7 +1,12 @@
 name: Build NDE customization package
 
 on:
-  push:
+  workflow_dispatch:
+    inputs:
+      view_id:
+        description: 'View ID (used to name the output zip)'
+        required: true
+        default: 'NDE'
 
 permissions:
    contents: read
@@ -24,5 +29,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build project
+      - name: Build NDE customization package
         run: npm run build
+        env:
+          VIEW_ID: ${{ inputs.view_id }}
+
+      - name: Upload NDE customization package
+        uses: actions/upload-artifact@v7
+        with:
+          name: custom-module-dist
+          path: dist/01MIT_INST-${{ inputs.view_id }}.zip
+          
+        
