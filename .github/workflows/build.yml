@@ -13,7 +13,11 @@ permissions:
 
 
 jobs:
+  test:
+    uses: ./.github/workflows/test.yml
+
   build:
+    needs: test
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
