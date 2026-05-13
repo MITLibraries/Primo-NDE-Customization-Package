@@ -50,5 +50,12 @@ jobs:
           name: custom-module-dist
           path: dist/01MIT_INST-${{ steps.sanitize.outputs.view_id }}.zip
           if-no-files-found: error
+
+      - name: Upload NDE customization package (unzipped)
+        uses: actions/upload-artifact@v7
+        with:
+          name: custom-module-dist-unzipped
+          path: dist/01MIT_INST-${{ steps.sanitize.outputs.view_id }}/
+          if-no-files-found: error
           
         
