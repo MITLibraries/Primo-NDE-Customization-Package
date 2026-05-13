@@ -43,5 +43,3 @@ jobs:
         with:
           name: custom-module-dist
           path: dist/01MIT_INST-${{ inputs.view_id }}.zip
-          
-        
