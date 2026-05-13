@@ -9,7 +9,7 @@ on:
         default: 'NDE'
 
 permissions:
-   contents: read
+  contents: read
 
 
 jobs:
