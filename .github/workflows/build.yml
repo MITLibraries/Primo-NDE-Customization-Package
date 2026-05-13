@@ -35,8 +35,10 @@ jobs:
 
       - name: Sanitize inputs
         id: sanitize
+        env:
+          RAW_VIEW_ID: ${{ inputs.view_id }}
         run: |
-          SANITIZED=$(echo "${{ inputs.view_id }}" | tr -cd '[:alnum:]_-')
+          SANITIZED=$(echo "${RAW_VIEW_ID}" | tr -cd '[:alnum:]_-')
           echo "view_id=${SANITIZED}" >> $GITHUB_OUTPUT
 
       - name: Build NDE customization package
@@ -57,5 +59,3 @@ jobs:
           name: custom-module-dist-unzipped
           path: dist/01MIT_INST-${{ steps.sanitize.outputs.view_id }}/
           if-no-files-found: error
-          
-        
