@@ -39,10 +39,9 @@ jobs:
           echo "view_id=${SANITIZED}" >> $GITHUB_OUTPUT
 
       - name: Build NDE customization package
-        run: npm run build
         env:
           VIEW_ID: ${{ steps.sanitize.outputs.view_id }}
-
+        run: npm run build
       - name: Upload NDE customization package
         uses: actions/upload-artifact@v7
         with:
