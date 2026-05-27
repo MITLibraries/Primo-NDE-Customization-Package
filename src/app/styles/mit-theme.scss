@@ -387,6 +387,10 @@ div.search-container, nde-search-box-presenter {
             display: none;
         } 
     }
+    // move natural language search button to the right of the advanced search button
+    button[data-qa="natural-language-search-button"] {
+    order: 1;
+    }
     
     .search_box_container {gap: 4px;}
 
