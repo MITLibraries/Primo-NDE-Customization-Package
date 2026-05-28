@@ -1,46 +1,45 @@
 import { ApplicationRef, DoBootstrap, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { createCustomElement, NgElementConstructor } from "@angular/elements";
-import { Router } from "@angular/router";
-import { selectorComponentMap } from "./custom1-module/customComponentMappings";
-import { TranslateModule } from "@ngx-translate/core";
+import { createCustomElement, NgElementConstructor } from '@angular/elements';
+import { Router } from '@angular/router';
+import { selectorComponentMap } from './custom1-module/customComponentMappings';
+import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { AutoAssetSrcDirective } from './services/auto-asset-src.directive';
-import { SHELL_ROUTER } from "./injection-tokens";
-import { loadLibChatWidget } from './utils/libchat';
+import { SHELL_ROUTER } from './injection-tokens';
 
-
-
-export const AppModule = ({ providers, shellRouter }: { providers: any, shellRouter: Router }) => {
+export const AppModule = ({
+  providers,
+  shellRouter,
+}: {
+  providers: any;
+  shellRouter: Router;
+}) => {
   @NgModule({
-    declarations: [
-      AutoAssetSrcDirective
-    ],
+    declarations: [AutoAssetSrcDirective],
     exports: [AutoAssetSrcDirective],
-    imports: [
-      BrowserModule,
-      CommonModule,
-      TranslateModule.forRoot({})
-    ],
+    imports: [BrowserModule, CommonModule, TranslateModule.forRoot({})],
     providers: [...providers, { provide: SHELL_ROUTER, useValue: shellRouter }],
-    bootstrap: []
+    bootstrap: [],
   })
   class AppModule implements DoBootstrap {
-    private webComponentSelectorMap = new Map<string, NgElementConstructor<unknown>>();
+    private webComponentSelectorMap = new Map<
+      string,
+      NgElementConstructor<unknown>
+    >();
 
-    constructor(private injector: Injector, private router: Router) {
+    constructor(
+      private injector: Injector,
+      private router: Router,
+    ) {
       router.dispose(); //this prevents the router from being initialized and interfering with the shell app router
     }
 
     ngDoBootstrap(appRef: ApplicationRef) {
-      // Load chat widget first
-      loadLibChatWidget();
-      console.log('loading libchat')
-
-
-      // Then register web components
       for (const [key, value] of selectorComponentMap) {
-        const customElement = createCustomElement(value, { injector: this.injector });
+        const customElement = createCustomElement(value, {
+          injector: this.injector,
+        });
         this.webComponentSelectorMap.set(key, customElement);
       }
     }
@@ -53,5 +52,5 @@ export const AppModule = ({ providers, shellRouter }: { providers: any, shellRou
       return this.webComponentSelectorMap.get(componentName);
     }
   }
-  return AppModule
-}
+  return AppModule;
+};

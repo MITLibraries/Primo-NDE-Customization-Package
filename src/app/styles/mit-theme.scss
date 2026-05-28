@@ -606,6 +606,11 @@ div.filters-container button[aria-label="Sort by Relevance"] {
     @include overrideLinksToLinks();
 }
 
+// libchat widget addon styling
+.lcs_slide_out-r {
+    bottom: 0 !important;
+    top: unset !important;
+}
 
 // Title styling 
 nde-record-title {
