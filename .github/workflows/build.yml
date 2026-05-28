@@ -30,20 +30,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Sanitize inputs
-        id: sanitize
-        env:
-          RAW_VIEW_ID: ${{ inputs.view_id }}
-        run: |
-          SANITIZED=$(echo "${RAW_VIEW_ID}" | tr -cd '[:alnum:]_-')
-          echo "view_id=${SANITIZED}" >> $GITHUB_OUTPUT
-
       - name: Build NDE customization package
         env:
           # Setting VIEW_ID here overrides the value in build-settings.env at build time.
           # dotenv does not overwrite variables already present in process.env (override: false by default),
           # so shell/CI env vars always take precedence over the .env file.
-          VIEW_ID: ${{ steps.sanitize.outputs.view_id }}
+          VIEW_ID: ${{ inputs.view_id }}
         run: npm run build
         
       - name: Upload NDE customization package
@@ -52,6 +44,6 @@ jobs:
         # taken from the filename (the name input is ignored when archive is false so is excluded in this step).
         uses: actions/upload-artifact@v7
         with:
-          path: dist/01MIT_INST-${{ steps.sanitize.outputs.view_id }}.zip
+          path: dist/01MIT_INST-${{ inputs.view_id }}.zip
           archive: false
           if-no-files-found: error
