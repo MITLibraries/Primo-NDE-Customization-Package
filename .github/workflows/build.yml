@@ -1,4 +1,4 @@
-name: Build NDE customization package
+name: Development Build for NDE customization package
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
       view_id:
         description: 'View ID (used to name the output zip)'
         required: true
-        default: 'NDE'
+        default: 'NDE_DEV'
 
 permissions:
   contents: read
@@ -30,28 +30,20 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Sanitize inputs
-        id: sanitize
-        env:
-          RAW_VIEW_ID: ${{ inputs.view_id }}
-        run: |
-          SANITIZED=$(echo "${RAW_VIEW_ID}" | tr -cd '[:alnum:]_-')
-          echo "view_id=${SANITIZED}" >> $GITHUB_OUTPUT
-
       - name: Build NDE customization package
         env:
-          VIEW_ID: ${{ steps.sanitize.outputs.view_id }}
+          # Setting VIEW_ID here overrides the value in build-settings.env at build time.
+          # dotenv does not overwrite variables already present in process.env (override: false by default),
+          # so shell/CI env vars always take precedence over the .env file.
+          VIEW_ID: ${{ inputs.view_id }}
         run: npm run build
+        
       - name: Upload NDE customization package
+        # postbuild.js produces dist/01MIT_INST-<view_id>.zip alongside the unzipped folder.
+        # archive: false uploads that file as-is without re-zipping it; the artifact name is
+        # taken from the filename (the name input is ignored when archive is false so is excluded in this step).
         uses: actions/upload-artifact@v7
         with:
-          name: custom-module-dist
-          path: dist/01MIT_INST-${{ steps.sanitize.outputs.view_id }}.zip
-          if-no-files-found: error
-
-      - name: Upload NDE customization package (unzipped)
-        uses: actions/upload-artifact@v7
-        with:
-          name: custom-module-dist-unzipped
-          path: dist/01MIT_INST-${{ steps.sanitize.outputs.view_id }}/
+          path: dist/01MIT_INST-${{ inputs.view_id }}.zip
+          archive: false
           if-no-files-found: error
