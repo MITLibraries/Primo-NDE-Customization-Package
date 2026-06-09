@@ -827,3 +827,14 @@ section.no-results-content {
         color: $color-text-primary !important;       
     } 
 }
+
+// Full Record Page - Request Options Section
+/* Reorder full display accordion panels */
+mat-accordion[displaymode="flat"] {
+  display: flex !important;
+  flex-direction: column;
+}
+
+mat-accordion[displaymode="flat"] > [id="nui.getit.service_viewit"] {
+     order: -1; 
+}
