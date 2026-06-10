@@ -1,0 +1,14 @@
+//===================
+// Libchat widget add-on styling
+// NOTE: These styles are applied to the libchat widget loaded via NDE add-on configuration.
+//===================
+
+//pin the chat widget to the bottom of the screen
+.lcs_slide_out-r {
+    bottom: 0 !important;
+    top: unset !important;
+}
+
+.lcs_slide_out-r div.lcs_header a {
+    left: 58px !important;
+}
