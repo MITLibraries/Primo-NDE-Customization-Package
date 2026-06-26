@@ -671,6 +671,14 @@ nde-full-display-container nde-record-title h3 a {
     text-decoration: none !important;
 }
 
+// Sign In box styled as informational
+nde-notification[message="nui.request.signin_additional"] > div {
+    border: 4px solid #007899;
+    border-radius: 0 !important;
+
+    span.notification-text {font-weight: 500 !important;}
+} 
+
 // Updating buttons to DS styles
 nde-request-card mat-card-actions{
     button {
