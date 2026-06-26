@@ -690,16 +690,26 @@ nde-request-card mat-card-actions{
     }
 }
 
+// Styling accordion content links
+mat-expansion-panel .mat-expansion-panel-content .mat-expansion-panel-body {
+    a {
+        @include underlinedSubtleLinks;
+    }
+}
+
 nde-location-items-requests {
     button {
         @include overrideButtonsToLinks;
     }
 }
 
-mat-card-actions[_ngcontent-ng-c452813935] {
+nde-request-card[_nghost-ng-c452813935] mat-card-content mat-card-actions[_ngcontent-ng-c452813935] {
     a {
         @include secondaryButton;
         padding-left: 32px !important;
+        text-decoration: none !important;
+
+        span {text-decoration: none !important;}
     }
 }
 
@@ -731,13 +741,6 @@ nde-location-item-service-button {
 nde-login {
     button {
         @include overrideButtonsToLinks;
-    }
-}
-
-// Styling accordion content links
-mat-expansion-panel .mat-expansion-panel-content .mat-expansion-panel-body {
-    a {
-        @include underlinedSubtleLinks;
     }
 }
 
