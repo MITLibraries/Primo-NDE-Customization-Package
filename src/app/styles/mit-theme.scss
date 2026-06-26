@@ -696,6 +696,13 @@ nde-location-items-requests {
     }
 }
 
+mat-card-actions[_ngcontent-ng-c452813935] {
+    a {
+        @include secondaryButton;
+        padding-left: 32px !important;
+    }
+}
+
 nde-location-item-service-button {
     button {
         @include overrideButtonsToLinks;
