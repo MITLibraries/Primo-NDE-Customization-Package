@@ -703,6 +703,19 @@ mat-card-actions[_ngcontent-ng-c452813935] {
     }
 }
 
+nde-general-electronic-service-link[_ngcontent-ng-c2421196244] {
+    a {
+        @include underlinedLinks;
+        font-weight: 400 !important;
+
+        span {
+            text-decoration: underline !important;
+            text-decoration-color: $color-blue-500 !important;
+        }
+
+    }
+}
+
 nde-location-item-service-button {
     button {
         @include overrideButtonsToLinks;
