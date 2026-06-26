@@ -703,13 +703,18 @@ nde-location-items-requests {
     }
 }
 
+.request-button[_ngcontent-ng-c452813935] {
+    width: auto !important;
+}
+
 nde-request-card[_nghost-ng-c452813935] mat-card-content mat-card-actions[_ngcontent-ng-c452813935] {
     a {
         @include secondaryButton;
-        padding-left: 32px !important;
+        width: auto;
         text-decoration: none !important;
-
+        padding: 0 24px !important;
         span {text-decoration: none !important;}
+        mat-icon {display: none !important;}
     }
 }
 
