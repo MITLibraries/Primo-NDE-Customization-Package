@@ -703,11 +703,11 @@ nde-location-items-requests {
     }
 }
 
-.request-button[_ngcontent-ng-c452813935] {
+nde-request-card[data-qa="AlmaRequest"] .request-button {
     width: auto !important;
 }
 
-nde-request-card[_nghost-ng-c452813935] mat-card-content mat-card-actions[_ngcontent-ng-c452813935] {
+nde-request-card[data-qa="Request via Scan & Deliver"] mat-card-content mat-card-actions.mat-mdc-card-actions {
     a {
         @include secondaryButton;
         width: auto;
@@ -718,7 +718,7 @@ nde-request-card[_nghost-ng-c452813935] mat-card-content mat-card-actions[_ngcon
     }
 }
 
-nde-general-electronic-service-link[_ngcontent-ng-c2421196244] {
+mat-expansion-panel nde-general-electronic-service-link {
     a {
         @include underlinedLinks;
         font-weight: 400 !important;
