@@ -1,7 +1,6 @@
 name: Prod Build for NDE customization package
 
 on:
-  workflow_dispatch:
   release:
     types: [published]
 
@@ -10,8 +9,8 @@ permissions:
 
 
 jobs:
-
   build:
+    if: github.event.release.target_commitish == 'mit-main'
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
