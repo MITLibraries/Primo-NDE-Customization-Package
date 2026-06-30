@@ -726,8 +726,12 @@ mat-expansion-panel nde-general-electronic-service-link {
         span {
             text-decoration: underline !important;
             text-decoration-color: $color-blue-500 !important;
+            height: 22px;
         }
 
+        mat-icon {
+            display: none !important;
+        }
     }
 }
 
