@@ -671,6 +671,14 @@ nde-full-display-container nde-record-title h3 a {
     text-decoration: none !important;
 }
 
+// Sign In box styled as informational
+nde-notification[message="nui.request.signin_additional"] > div {
+    border: 4px solid #007899;
+    border-radius: 0 !important;
+
+    span.notification-text {font-weight: 500 !important;}
+} 
+
 // Updating buttons to DS styles
 nde-request-card mat-card-actions{
     button {
@@ -682,9 +690,48 @@ nde-request-card mat-card-actions{
     }
 }
 
+// Styling accordion content links
+mat-expansion-panel .mat-expansion-panel-content .mat-expansion-panel-body {
+    a {
+        @include underlinedSubtleLinks;
+    }
+}
+
 nde-location-items-requests {
     button {
         @include overrideButtonsToLinks;
+    }
+}
+
+nde-request-card .request-button {
+    width: auto !important;
+}
+
+mat-expansion-panel .mat-expansion-panel-content nde-request-card mat-card-content mat-card-actions.mat-mdc-card-actions {
+    a {
+        @include secondaryButton;
+        width: auto;
+        text-decoration: none !important;
+        padding: 0 24px !important;
+        span {text-decoration: none !important;}
+        mat-icon {display: none !important;}
+    }
+}
+
+mat-expansion-panel nde-general-electronic-service-link {
+    a {
+        @include underlinedLinks;
+        font-weight: 400 !important;
+
+        span {
+            text-decoration: underline !important;
+            text-decoration-color: $color-blue-500 !important;
+            height: 22px;
+        }
+
+        mat-icon {
+            display: none !important;
+        }
     }
 }
 
@@ -703,13 +750,6 @@ nde-location-item-service-button {
 nde-login {
     button {
         @include overrideButtonsToLinks;
-    }
-}
-
-// Styling accordion content links
-mat-expansion-panel .mat-expansion-panel-content .mat-expansion-panel-body {
-    a {
-        @include underlinedSubtleLinks;
     }
 }
 
