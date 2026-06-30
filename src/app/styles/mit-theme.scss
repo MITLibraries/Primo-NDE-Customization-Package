@@ -707,7 +707,7 @@ nde-request-card[data-qa="AlmaRequest"] .request-button {
     width: auto !important;
 }
 
-nde-request-card[data-qa="Request via Scan & Deliver"] mat-card-content mat-card-actions.mat-mdc-card-actions {
+mat-expansion-panel .mat-expansion-panel-content nde-request-card mat-card-content mat-card-actions.mat-mdc-card-actions {
     a {
         @include secondaryButton;
         width: auto;
