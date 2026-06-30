@@ -5,7 +5,7 @@ on:
     types: [published]
 
 permissions:
-  contents: read
+  contents: write
 
 
 jobs:
@@ -34,12 +34,7 @@ jobs:
           VIEW_ID: NDE
         run: npm run build
         
-      - name: Upload NDE customization package
-        # postbuild.js produces dist/01MIT_INST-<view_id>.zip alongside the unzipped folder.
-        # archive: false uploads that file as-is without re-zipping it; the artifact name is
-        # taken from the filename.
-        uses: actions/upload-artifact@v7
-        with:
-          path: dist/01MIT_INST-NDE.zip
-          archive: false
-          if-no-files-found: error
+      - name: Upload NDE zip to Release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${{ github.event.release.tag_name }}" dist/01MIT_INST-NDE.zip --clobber
