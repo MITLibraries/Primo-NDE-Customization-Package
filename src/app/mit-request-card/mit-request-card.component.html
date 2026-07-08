@@ -1,0 +1,25 @@
+<mat-card class="request-card custom-request-card clickable-card"
+          (click)="handleCardClick()"
+          role="button"
+          tabindex="0"
+          (keyup.enter)="handleCardClick()"
+          (keyup.space)="handleCardClick()">
+  <mat-card-content class="column-for-requests-container">
+    <div class="left-section">
+      <div class="request-card-icon-title-subtitle">
+       
+          <mat-icon class="nde-mat-icon-size-large">
+          </mat-icon>
+       
+        <div class="request-card-title-subtitle">
+          <div class="request-title mat-body-large">
+            {{ (host.requestService?.serviceTitle ?? '' | translate) }}
+          </div>
+          <span class="request-description mat-body-medium"
+            [innerHTML]="(serviceDescription | translate)">
+          </span>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,29 @@
+.clickable-card {
+  margin-top: 30px;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+
+  &:focus {
+    outline: 2px solid black;
+    outline-offset: 2px;
+  }
+
+  &:focus-visible {
+    outline: 2px solid black;
+    outline-offset: 2px;
+  }
+.request-card-icon-title-subtitle {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.column-for-icon {
+  flex-shrink: 0;
+}  
+}
