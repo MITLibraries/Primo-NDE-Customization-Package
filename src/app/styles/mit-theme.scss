@@ -722,15 +722,22 @@ mat-expansion-panel nde-general-electronic-service-link {
     a {
         @include underlinedLinks;
         font-weight: 400 !important;
+        display: inline-block;
+        line-height: 1.4;
 
         span {
             text-decoration: underline !important;
             text-decoration-color: $color-blue-500 !important;
             height: 22px;
+            overflow: visible !important;
         }
 
         mat-icon {
             display: none !important;
+        }
+
+        &.display-flex {
+            display: inline !important;
         }
     }
 }
