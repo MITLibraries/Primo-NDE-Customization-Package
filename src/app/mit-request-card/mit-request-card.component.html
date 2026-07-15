@@ -1,9 +1,9 @@
 <mat-card class="request-card custom-request-card clickable-card"
-          (click)="handleCardClick()"
+          (click)="handleCardClick($event)"
           role="button"
           tabindex="0"
-          (keyup.enter)="handleCardClick()"
-          (keyup.space)="handleCardClick()">
+          (keydown.enter)="handleCardClick($event)"
+          (keydown.space)="$event.preventDefault(); handleCardClick($event)">
   <mat-card-content class="column-for-requests-container">
     <div class="left-section">
       <div class="request-card-icon-title-subtitle">
@@ -13,7 +13,7 @@
        
         <div class="request-card-title-subtitle">
           <div class="request-title mat-body-large">
-            {{ (host.requestService?.serviceTitle ?? '' | translate) }}
+            {{ (host.requestService?.serviceTitle ?? '') | translate }}
           </div>
           <span class="request-description mat-body-medium"
             [innerHTML]="(serviceDescription | translate)">

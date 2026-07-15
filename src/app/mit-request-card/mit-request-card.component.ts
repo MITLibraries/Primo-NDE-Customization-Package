@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -31,13 +30,7 @@ interface RequestCard {
 @Component({
   selector: 'custom-mit-request-card',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    TranslateModule,
-  ],
+  imports: [CommonModule, MatCardModule, MatIconModule, TranslateModule],
   templateUrl: './mit-request-card.component.html',
   styleUrl: './mit-request-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -105,17 +98,19 @@ export class MitRequestCardComponent implements OnInit {
     this.hostIcon.nativeElement.appendChild(svgClone);
   }
   // use the host component's methods to handle the click event
-  handleCardClick(): void {
+  handleCardClick(event?: Event): void {
+    const target = event?.target as HTMLElement | null;
+    if (target?.closest?.('a, button, input, textarea, select')) return;
+
     if (this.host?.isNotGES?.()) {
       this.host.handleRequestBtnClick?.();
-    } else {
-      const link = this.host?.getLinkForGesOrResourceSharing?.();
-      // send analytics event for GES or Resource Sharing click
-      // the request form handles sending analytics for non-GES requests.
-      this.host?.sendAnalytics?.();
-      if (link) {
-        window.open(link, '_blank', 'noopener,noreferrer');
-      }
+      return;
     }
+
+    const link = this.host?.getLinkForGesOrResourceSharing?.();
+    // send analytics event for GES or Resource Sharing click
+    // the request form handles sending analytics for non-GES requests.
+    this.host?.sendAnalytics?.();
+    if (link) window.open(link, '_blank', 'noopener,noreferrer');
   }
 }
