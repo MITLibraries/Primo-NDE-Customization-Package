@@ -1,0 +1,34 @@
+.clickable-card {
+  margin-top: 30px;
+  cursor: pointer;
+  border-radius: 0;
+  border: 1px solid #0000FF;
+  background-color: #fff;
+  box-shadow: none;
+
+  &:hover {
+    background-color: #F0F0FF;
+    color: #0000FF;
+  }
+
+  &:focus-visible, &:focus {
+    outline: 2px solid black;
+    outline-offset: 2px;
+  }
+
+  .request-card-icon-title-subtitle {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+
+  .request-title {
+    font-weight: 500;
+  }
+
+  ::ng-deep mat-icon svg path {
+   stroke: var(--sys-primary);
+  }
+}
+::ng-deep nde-request-card { display: none; }
