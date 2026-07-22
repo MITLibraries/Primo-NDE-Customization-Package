@@ -1,0 +1,29 @@
+aside {
+  background-color: #007899;
+  padding: 20px 0;
+
+    @media only screen and (max-width: 599.98px) {
+        padding: 20px 16px;
+    } 
+
+  .content-wrapper {
+    font-size: 18px;
+    font-weight: 500;
+    color: #e5f9ff;
+    margin: 0 auto;
+
+    a:link, a:visited, a:active {
+      color: #fff !important;
+      text-decoration: underline !important;
+      text-decoration-color: #00c8ff !important;
+
+      &:hover {
+        text-decoration-color: #fff !important;
+      }
+    }
+
+  }  
+}
+
+
+
