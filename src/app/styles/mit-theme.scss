@@ -274,7 +274,9 @@ $color-border-default: $color-gray-400;
 // Style adjustments to logo to handle site title
 nde-logo {
     flex-basis: 87px;
-    padding-right: 24px;
+    margin-right: 24px;
+    max-width: 87px;
+    margin-left: 0 !important;
 }
 @media (max-width: 600px) {
     nde-logo + ng-component.ng-star-inserted {
@@ -284,11 +286,18 @@ nde-logo {
 
 // Header styles
 header.top-bar {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
 
     .header-container {
+        @include applyPrimoContainerWidths;
+
         background: url("https://cdn.mitlibrary.net/files/branding/local/vi-shape7-tp.svg") no-repeat -48px -250px;
         padding: 32px 0 !important;      
         
+        nde-user-panel {margin-right: 0;}
+
         > div.flex-row {margin-left: 0 !important;}
 
         .main-menu-container {
