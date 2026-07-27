@@ -893,3 +893,23 @@ mat-accordion[displaymode="flat"] {
 mat-accordion[displaymode="flat"] > [id="nui.getit.service_viewit"] {
      order: -1; 
 }
+
+// TOP ALERT BANNER STYLES
+// Overriding styles that we can't get specificity to override in the component styles
+#mitl-alert-banner {
+    .content-wrapper {
+        @include applyPrimoContainerWidths;
+
+        a:link, a:visited, a:active {
+        color: #fff;
+        text-decoration: underline;
+        text-decoration-color: #00c8ff;
+        text-underline-offset: 5px;
+        transition: all .25s ease-in-out 0s;
+
+            &:hover {
+                text-decoration-color: #fff;
+            }
+        }        
+    }
+}
