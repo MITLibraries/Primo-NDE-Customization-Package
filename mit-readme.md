@@ -23,7 +23,7 @@ Testing locally in the dev environment is usually sufficient for code review.
 In some cases it may be desirable to test changes in a production-like environment in addition to the local dev environment.
 1. Push a branch with your changes to GitHub.
 2. Run the GitHub Actions workflow for a development build targeting the branch you want to test.
-3. The action's default setting creates a customization packge for the NDE_DEV view, but this can be changed if you want to deploy the customization package to a different Primo view.
+3. The action's default setting creates a customization package for the NDE_DEV view, but this can be changed if you want to deploy the customization package to a different Primo view.
 4. Download the customization package from the Development build action summary in the repo after the action completes
 5. Upload the .zip file to the target Primo view via the Alma admin interface following the instructions at https://knowledge.exlibrisgroup.com/Primo/Product_Documentation/020Primo_VE/Primo_VE_(English)/050Display_Configuration/010Configuring_Discovery_Views_for_Primo_VE#Managing_Customization_Packages (Requires user with write access to Discovery Configuration in Alma)
 6. Test the changes at https://mit.primo.exlibrisgroup.com/nde/home?vid=01MIT_INST:{view}
