@@ -13,7 +13,7 @@
 4. Once your PR is reviewed and approved, merge your changes into `mit-main`.
 
 ## Testing changes in a local development environment as part of code review
-Testing locally in the dev environment is usually sufficient for code review
+Testing locally in the dev environment is usually sufficient for code review.
 1. Clone this repository from GitHub (or just `git pull origin [new-nde-changes]` if you already have our NDE development environment installed locally)
 2. If not already installed, install the NDE development environment following the instructions in README.md.
 3. Switch to the branch being tested: `git checkout [new-nde-changes]`.
@@ -22,7 +22,7 @@ Testing locally in the dev environment is usually sufficient for code review
 ## Testing changes by deploying to Primo testing environment as part of code review - An Alma Admin with access to Discovery Configuration must take these steps
 In some cases it may be desirable to test changes in a production-like environment in addition to the local dev environment.
 1. Push a branch with your changes to GitHub.
-2. Run the github action for a development build targeting the branch you want to test. 
+2. Run the GitHub Actions workflow for a development build targeting the branch you want to test.
 3. The action's default setting creates a customization packge for the NDE_DEV view, but this can be changed if you want to deploy the customization package to a different Primo view.
 4. Download the customization package from the Development build action summary in the repo after the action completes
 5. Upload the .zip file to the target Primo view via the Alma admin interface following the instructions at https://knowledge.exlibrisgroup.com/Primo/Product_Documentation/020Primo_VE/Primo_VE_(English)/050Display_Configuration/010Configuring_Discovery_Views_for_Primo_VE#Managing_Customization_Packages (Requires user with write access to Discovery Configuration in Alma)
