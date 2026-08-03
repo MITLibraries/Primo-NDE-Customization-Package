@@ -6,7 +6,7 @@ import { MitAlertBannerComponent } from '../mit-alert-banner/mit-alert-banner.co
 // Define the map
 export const selectorComponentMap = new Map<string, any>([
   ['nde-search-no-results', NoResultsComponent],
-  ['nde-logo-after', PrimoBrandedNameComponent],
+  ['nde-user-panel-top', PrimoBrandedNameComponent],
   ['nde-request-card-after', MitRequestCardComponent],
   ['nde-header-before', MitAlertBannerComponent],
 ]);

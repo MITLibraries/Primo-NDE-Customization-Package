@@ -3,6 +3,7 @@ h1 {
   height: 28px;
   padding-left: 24px;
   line-height: 4px;
+  display:inline-block;
 
   a {
     color: white;
@@ -15,4 +16,8 @@ h1 {
         text-decoration: underline;
     }
   }
+}
+
+:host {
+  display: flex;
 }

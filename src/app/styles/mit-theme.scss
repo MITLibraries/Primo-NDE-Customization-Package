@@ -7,6 +7,21 @@ $mit-typography: mat.define-theme((typography :(brand-family: "neue-haas-grotesk
             )));
 
 
+
+ nde-logo {
+    display: none !important;
+ }           
+
+header .flex-row.header-container.flex-layout-space-between {
+flex-direction: column-reverse;
+}
+
+nde-user-panel {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap-reverse;
+}
+
 // Set all fonts in NDE to Typekit neue haas grotesk
 html {
     @include mat.all-component-typographies($mit-typography);
@@ -272,7 +287,7 @@ $color-border-default: $color-gray-400;
 }
 
 // Style adjustments to logo to handle site title
-nde-logo {
+nde-logo, .nde-logo {
     flex-basis: 87px;
     margin-right: 24px;
     max-width: 87px;
@@ -293,6 +308,12 @@ header.top-bar {
     .header-container {
         @include applyPrimoContainerWidths;
 
+        // CHANGED: widen the header specifically in the 960–1280 band so the
+        // main menu has more room (was clamped to max 1088px via the mixin).
+        @media (min-width: 960px) and (max-width: 1279.98px) {
+            width: clamp(912px, 92%, 1200px);
+        }
+
         background: url("https://cdn.mitlibrary.net/files/branding/local/vi-shape7-tp.svg") no-repeat -48px -250px;
         padding: 32px 0 !important;      
         
@@ -301,7 +322,7 @@ header.top-bar {
         > div.flex-row {margin-left: 0 !important;}
 
         .main-menu-container {
-            justify-content: flex-end;
+            justify-content: flex-start;
 
             ul {
 
@@ -310,8 +331,11 @@ header.top-bar {
                     a {
                         color: $color-white;
                         text-transform: none;
-                        padding-left: 16px;
-                        padding-right: 16px;
+                        // CHANGED: reduced from 16px to 8px. This padding is
+                        // measured into the shell's item-width calc, so trimming
+                        // it lets more menu items stay visible.
+                        padding-left: 8px;
+                        padding-right: 8px;
 
                         @include underlinedNavLinks;
 
