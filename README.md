@@ -329,7 +329,7 @@ The NDE UI add-on framework allows various stakeholders to develop and integrate
 
 Library staff can easily add, configure, and manage these add-ons through Alma, following guidelines provided by the stakeholders. These typically include:
 
-- **Add-on Name** – The identifier used in Alma’s configuration.
+- **Add-on Name** – The identifier used in Alma’s configuration. This must match the add-on name as set when developing the add-on in the [section](#set-add-on-name) below. 
 - **Add-on URL** – The location where the add-on is hosted (static folder to load the add-on at runtime).
 - **Configuration Parameters** – JSON-based config parameters to be referenced at runtime by the add-on.
 
