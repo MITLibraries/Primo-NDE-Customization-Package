@@ -17,6 +17,8 @@ test('resolveCustomModuleManifestPath handles IZ manifest requests and ignores c
 
   assert.equal(shouldProxyLandingPageAssetRequest('/custom/TEST_INST-TEST_VIEW/assets/landingpage/icon.svg'), true);
   assert.equal(shouldProxyLandingPageAssetRequest('/nde/custom/TEST_INST-TEST_VIEW/assets/landingpage/search.svg'), true);
+  assert.equal(shouldProxyLandingPageAssetRequest('/custom/TEST_INST-TEST_VIEW/assets/homepage/homepage.css'), true);
+  assert.equal(shouldProxyLandingPageAssetRequest('/nde/custom/TEST_INST-TEST_VIEW/assets/homepage/homepage_de.html'), true);
   assert.equal(shouldProxyLandingPageAssetRequest('/custom/TEST_INST-TEST_VIEW/assets/main.js'), false);
 });
 
