@@ -1,6 +1,5 @@
 import fs from 'node:fs';
 import {PROXY_TARGET} from "./proxy.const.mjs";
-import {customizationConfigOverride} from "./customization_config_override.mjs";
 import {buildMergedManifestResponse, createLocalCustomModuleAssetManifest, deepMerge, isCustomModuleAssetManifestRequest, resolveCustomModuleManifestPath} from "./proxy-utils.mjs";
 
 async function serveCustomModuleManifest(req, res) {
@@ -30,7 +29,7 @@ const proxyRules = [
   {
     context: ['/nde/home', '/home'],
     target: PROXY_TARGET,
-    secure: true,
+    secure: false,
     changeOrigin: true,
     logLevel: 'debug',
     selfHandleResponse: true,
@@ -50,10 +49,14 @@ const proxyRules = [
       '/custom/*/assets/landingpage',
       '/custom/*/assets/landingpage/**',
       '/nde/custom/*/assets/landingpage',
-      '/nde/custom/*/assets/landingpage/**'
+      '/nde/custom/*/assets/landingpage/**',
+      '/custom/*/assets/homepage',
+      '/custom/*/assets/homepage/**',
+      '/nde/custom/*/assets/homepage',
+      '/nde/custom/*/assets/homepage/**'
     ],
     target: PROXY_TARGET,
-    secure: true,
+    secure: false,
     changeOrigin: true,
     logLevel: 'debug',
   },
@@ -74,7 +77,7 @@ const proxyRules = [
   {
     context: ['/custom/*/asset-manifest.json', '/nde/custom/*/asset-manifest.json'],
     target: PROXY_TARGET,
-    secure: true,
+    secure: false,
     changeOrigin: true,
     logLevel: 'debug',
     selfHandleResponse: true,
@@ -98,7 +101,7 @@ const proxyRules = [
   {
     context: ['/primaws/rest/pub/configuration/vid/'],
     target: PROXY_TARGET,
-    secure: true,
+    secure: false,
     changeOrigin: true,
     logLevel: 'debug',
     selfHandleResponse: true,
@@ -109,8 +112,6 @@ const proxyRules = [
         try {
           const bodyStr = Buffer.concat(chunks).toString('utf8');
           const json = JSON.parse(bodyStr);
-          // MERGE instead of replace to retain unspecified fields
-          json.customization = deepMerge(json.customization || {}, customizationConfigOverride);
           const out = JSON.stringify(json);
           res.setHeader('content-type', 'application/json');
           res.end(out);
@@ -131,7 +132,7 @@ const proxyRules = [
       return url;
 
     },
-    secure: true,
+    secure: false,
     logLevel: 'debug',
     pathRewrite: { '^/nde/custom/.*/': '' },
 
@@ -141,7 +142,7 @@ const proxyRules = [
       '**', '!/nde/custom/**', '!/nde/home', '!/home'
     ],
     target: PROXY_TARGET,
-    secure: true,
+    secure: false,
     changeOrigin: true,
     logLevel: 'debug',
 

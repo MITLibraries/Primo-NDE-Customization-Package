@@ -254,7 +254,7 @@ export function shouldProxyLandingPageRequest(requestPath) {
 
 export function shouldProxyLandingPageAssetRequest(requestPath) {
   const normalizedPath = (requestPath || '').split('?')[0].replace(/^\/+/, '/');
-  return /^\/(?:nde\/)?custom\/[^/]+\/assets\/landingpage(?:\/|$)/.test(normalizedPath);
+  return /^\/(?:nde\/)?custom\/[^/]+\/assets\/(?:landingpage|homepage)(?:\/|$)/.test(normalizedPath);
 }
 
 export function resolveCustomModuleManifestPath(requestPath, buildRoot = getCustomModuleManifestRoot()) {
