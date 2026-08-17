@@ -46,3 +46,45 @@ test('createMergedAssetManifest merges dynamic IZ proxy sources and derives dire
   const derived = addParentDirectories(['assets/images/icons/test.svg']);
   assert.deepEqual(derived, ['assets', 'assets/images', 'assets/images/icons']);
 });
+
+test('getAssetRelativePath strips the custom module asset prefix', async () => {
+  const { getAssetRelativePath } = await import('../proxy/proxy-utils.mjs');
+
+  assert.equal(getAssetRelativePath('/custom/TEST_INST-TEST_VIEW/assets/homepage/homepage_background.svg'), 'homepage/homepage_background.svg');
+  assert.equal(getAssetRelativePath('/nde/custom/TEST_INST-TEST_VIEW/assets/main.js'), 'main.js');
+  assert.equal(getAssetRelativePath('/nde/custom/TEST_INST-TEST_VIEW/assets/images/a.svg?v=1'), 'images/a.svg');
+  assert.equal(getAssetRelativePath('/nde/custom/TEST_INST-TEST_VIEW/assets'), null);
+  assert.equal(getAssetRelativePath('/nde/home'), null);
+});
+
+test('resolveLocalAssetFilePath prefers src/assets and returns null when missing', async (t) => {
+  const os = require('node:os');
+  const fs = require('node:fs');
+  const path = require('node:path');
+  const { resolveLocalAssetFilePath } = await import('../proxy/proxy-utils.mjs');
+
+  const originalCwd = process.cwd();
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'asset-test-'));
+  const buildRoot = path.join(tempRoot, 'dist', 'custom-module');
+  try {
+    fs.mkdirSync(path.join(tempRoot, 'src', 'assets', 'homepage'), { recursive: true });
+    fs.writeFileSync(path.join(tempRoot, 'src', 'assets', 'homepage', 'homepage_background.svg'), '<svg/>');
+    fs.mkdirSync(path.join(buildRoot, 'assets', 'homepage'), { recursive: true });
+    fs.writeFileSync(path.join(buildRoot, 'assets', 'homepage', 'built_only.svg'), '<svg/>');
+
+    process.chdir(tempRoot);
+
+    const srcHit = resolveLocalAssetFilePath('homepage/homepage_background.svg', buildRoot);
+    assert.equal(srcHit, path.join(tempRoot, 'src', 'assets', 'homepage', 'homepage_background.svg'));
+
+    const distHit = resolveLocalAssetFilePath('homepage/built_only.svg', buildRoot);
+    assert.equal(distHit, path.join(buildRoot, 'assets', 'homepage', 'built_only.svg'));
+
+    assert.equal(resolveLocalAssetFilePath('homepage/missing.svg', buildRoot), null);
+    assert.equal(resolveLocalAssetFilePath('../secret.txt', buildRoot), null);
+    assert.equal(resolveLocalAssetFilePath(null, buildRoot), null);
+  } finally {
+    process.chdir(originalCwd);
+    fs.rmSync(tempRoot, { recursive: true, force: true });
+  }
+});

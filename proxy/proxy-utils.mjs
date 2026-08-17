@@ -2,7 +2,27 @@ import fs from 'node:fs';
 import path from 'node:path';
 import http from 'node:http';
 import https from 'node:https';
+import net from 'node:net';
+import crypto from 'node:crypto';
 import { PROXY_TARGET } from './proxy.const.mjs';
+
+// Some target servers (e.g. sqa-cn01) do not support RFC 5746 secure renegotiation,
+// which OpenSSL 3 / Node 18+ rejects with EPROTO ERR_SSL_UNSAFE_LEGACY_RENEGOTIATION_DISABLED.
+class ProxyTlsAgent extends https.Agent {
+  createConnection(options, callback) {
+    // Rules with a router may send the request back to the local (plain http) dev server.
+    if (Number(options.port) !== 443) {
+      return net.connect(options);
+    }
+    return super.createConnection(options, callback);
+  }
+}
+
+export const proxyAgent = new ProxyTlsAgent({
+  keepAlive: true,
+  rejectUnauthorized: false,
+  secureOptions: crypto.constants.SSL_OP_LEGACY_SERVER_CONNECT,
+});
 
 // Added deepMerge utility to retain unspecified fields
 export function deepMerge(target, source) {
@@ -257,6 +277,39 @@ export function shouldProxyLandingPageAssetRequest(requestPath) {
   return /^\/(?:nde\/)?custom\/[^/]+\/assets\/(?:landingpage|homepage)(?:\/|$)/.test(normalizedPath);
 }
 
+export function getAssetRelativePath(requestPath) {
+  const normalizedPath = (requestPath || '').split('?')[0];
+  const match = normalizedPath.match(/^\/(?:nde\/)?custom\/[^/]+\/assets\/(.*)$/);
+  if (!match || !match[1]) {
+    return null;
+  }
+  return match[1].replace(/^\/+/, '');
+}
+
+export function resolveLocalAssetFilePath(relativePath, buildRoot = getCustomModuleManifestRoot()) {
+  if (!relativePath) {
+    return null;
+  }
+
+  const safeRelative = relativePath.split('/').filter((segment) => segment && segment !== '..' && segment !== '.').join(path.sep);
+  if (!safeRelative) {
+    return null;
+  }
+
+  const candidates = [
+    path.resolve(process.cwd(), 'src', 'assets', safeRelative),
+    path.resolve(buildRoot, 'assets', safeRelative),
+  ];
+
+  for (const candidate of candidates) {
+    if (fs.existsSync(candidate) && fs.statSync(candidate).isFile()) {
+      return candidate;
+    }
+  }
+
+  return null;
+}
+
 export function resolveCustomModuleManifestPath(requestPath, buildRoot = getCustomModuleManifestRoot()) {
   if (!isCustomModuleAssetManifestRequest(requestPath)) {
     return null;
@@ -275,8 +328,9 @@ export function buildMergedManifestResponse(requestPath, localManifestPath, targ
   console.log(`[manifest] localManifestPath=${localManifestPathResolved || 'runtime-generated'}`);
 
   return new Promise((resolve, reject) => {
-    const transport = targetManifestUrl.protocol === 'https:' ? https : http;
-    const request = transport.get(targetManifestUrlString, (response) => {
+    const isSecureTarget = targetManifestUrl.protocol === 'https:';
+    const transport = isSecureTarget ? https : http;
+    const request = transport.get(targetManifestUrlString, isSecureTarget ? { agent: proxyAgent } : {}, (response) => {
       const chunks = [];
       response.on('data', (chunk) => chunks.push(chunk));
       response.on('end', () => {
