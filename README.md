@@ -11,6 +11,27 @@ To start proxy mode use the command:
 npm run start:proxy
 ```
 
+### How the asset manifest is resolved in proxy mode
+
+When running in proxy mode, requests to `/custom/*/asset-manifest.json` are answered with a manifest
+computed at runtime (nothing is ever written to disk) by merging three sources:
+
+- The **remote** manifest from your configured `PROXY_TARGET` environment.
+- Your **locally built** output at `dist/{INST_ID}-{VIEW_ID}` (named from `build-settings.env`) — this
+  is where compiled/bundled files such as the generated `custom.css` or `remoteEntry.js` live.
+- Your **local `src/assets`** folder — scanned live on every request.
+
+Because the built output is only picked up if it already exists on disk, **you must run `npm run build`
+at least once before starting proxy mode** so that `dist/{INST_ID}-{VIEW_ID}` is present; otherwise only
+files under `src/assets` will show up in the manifest, and compiled-only files (like a root-level
+`custom.css`) will appear to be missing.
+
+After that initial build:
+- Changes under `src/assets` are picked up immediately on the next request — no rebuild needed.
+- Changes to compiled/bundled files (e.g. theme/SCSS changes, code changes) require re-running
+  `npm run build` to refresh `dist/{INST_ID}-{VIEW_ID}`; no dev-server restart is needed, the proxy
+  re-scans the folder on every manifest request.
+
 ---
 
 ### Overview
@@ -329,7 +350,7 @@ The NDE UI add-on framework allows various stakeholders to develop and integrate
 
 Library staff can easily add, configure, and manage these add-ons through Alma, following guidelines provided by the stakeholders. These typically include:
 
-- **Add-on Name** – The identifier used in Alma’s configuration.
+- **Add-on Name** – The identifier used in Alma’s configuration. This must match the add-on name as set when developing the add-on in the [section](#set-add-on-name) below. 
 - **Add-on URL** – The location where the add-on is hosted (static folder to load the add-on at runtime).
 - **Configuration Parameters** – JSON-based config parameters to be referenced at runtime by the add-on.
 
