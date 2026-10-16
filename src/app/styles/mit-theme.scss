@@ -354,6 +354,12 @@ header.top-bar {
     }
 }
 
+// Reverse rendering order of logged-in user initials
+.user-area .user-area-logged-in span {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+}
+
 //===============================================
 // SEARCH CONTAINERS (Homepage and Child Pages)
 //===============================================
