@@ -45,6 +45,19 @@ async function serveCustomModuleManifest(req, res) {
 
 const proxyRules = [
   {
+    // Redirect external login requests to the real Primo server; letting the Node
+    // proxy forward this server-side (instead of a real browser redirect) causes
+    // production's session cookie to be rejected since it's scoped to the production
+    // domain, not localhost, which silently breaks login in the dev proxy.
+    context: ["/primaws/suprimaExtLogin"],
+    target: PROXY_TARGET,
+    changeOrigin: true,
+    followRedirects: true,
+    onProxyReq(_proxyReq, req, res) {
+      res.writeHead(302, { location: PROXY_TARGET + req.url });
+    },
+  },
+  {
     context: ['/nde/home', '/home'],
     target: PROXY_TARGET,
     agent: proxyAgent,
