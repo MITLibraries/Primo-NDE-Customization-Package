@@ -3,6 +3,7 @@ const mf = require("@angular-architects/module-federation/webpack");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require("path");
 const webpack = require("webpack");
+const buildId = require('./build-id');
 const share = mf.share;
 
 const sharedMappings = new mf.SharedMappings();
@@ -38,6 +39,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      CUSTOMIZATION_BUILD_ID: JSON.stringify(buildId),
+    }),
     new CopyWebpackPlugin({
       patterns: [
         { from: 'src/assets', to: 'assets',
