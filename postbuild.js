@@ -1,11 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 const archiver = require('archiver');
+const buildId = require('./build-id');
 require('dotenv').config({ path: './build-settings.env' });
 
 const distPath = path.join(__dirname, 'dist', 'custom-module');
 const targetPath = path.join(__dirname, 'dist', `${process.env.INST_ID}-${process.env.VIEW_ID}`);
-const zipPath = path.join(__dirname, 'dist', `${process.env.INST_ID}-${process.env.VIEW_ID}.zip`);
+const zipPath = path.join(__dirname, 'dist', `${process.env.INST_ID}-${process.env.VIEW_ID}-${buildId}.zip`);
 
 function removeDirectory(directory, callback) {
     fs.rm(directory, { recursive: true, force: true }, callback);

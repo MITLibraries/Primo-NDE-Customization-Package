@@ -17,6 +17,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      BUILD_ID: ${{ github.run_id }}-${{ github.run_attempt }}
 
     steps:
       - uses: actions/checkout@v6
@@ -39,11 +41,11 @@ jobs:
         run: npm run build
         
       - name: Upload NDE customization package
-        # postbuild.js produces dist/01MIT_INST-<view_id>.zip alongside the unzipped folder.
+        # postbuild.js includes BUILD_ID in the zip filename, but not the enclosed folder.
         # archive: false uploads that file as-is without re-zipping it; the artifact name is
         # taken from the filename (the name input is ignored when archive is false so is excluded in this step).
         uses: actions/upload-artifact@v7
         with:
-          path: dist/01MIT_INST-${{ inputs.view_id }}.zip
+          path: dist/01MIT_INST-${{ inputs.view_id }}-${{ env.BUILD_ID }}.zip
           archive: false
           if-no-files-found: error

@@ -13,6 +13,8 @@ jobs:
     if: github.event.release.target_commitish == 'mit-main'
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      BUILD_ID: ${{ github.run_id }}-${{ github.run_attempt }}
 
     steps:
       - uses: actions/checkout@v6
@@ -37,4 +39,4 @@ jobs:
       - name: Upload NDE zip to Release assets
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release upload "${{ github.event.release.tag_name }}" dist/01MIT_INST-NDE.zip --clobber
+        run: gh release upload "${{ github.event.release.tag_name }}" "dist/01MIT_INST-NDE-${BUILD_ID}.zip" --clobber
