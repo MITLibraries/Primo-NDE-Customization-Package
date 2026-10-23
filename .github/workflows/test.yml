@@ -21,6 +21,9 @@ jobs:
           node-version: '24'
           cache: 'npm'
 
+      - name: Test upstream merge workflow
+        run: node --test .github/skills/merge-upstream/scripts/merge-upstream.test.cjs
+
       - name: Install dependencies
         run: npm ci
 

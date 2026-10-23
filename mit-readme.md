@@ -47,7 +47,21 @@ This repository is forked from https://github.com/ExLibrisGroup/customModule
 
 Use the repository's [merge-upstream skill](.github/skills/merge-upstream/SKILL.md)
 by invoking `/merge-upstream` in a skill-enabled assistant, or follow the same
-workflow manually:
+workflow manually. The skill delegates mechanical Git operations to a
+[resumable shell script](.github/skills/merge-upstream/scripts/merge-upstream.sh):
+
+```bash
+bash .github/skills/merge-upstream/scripts/merge-upstream.sh help
+bash .github/skills/merge-upstream/scripts/merge-upstream.sh prepare
+```
+
+The commands are `prepare`, `status`, `validate`, `finalize`, `refresh`, and
+`publish`. Run `status` to inspect a prepared integration, then continue with
+the next phase instead of starting over. Git state lives in the worktree's Git
+directory. The script will not stash/discard work or overwrite an unfinished integration. Conflict resolution,
+review, and approval remain human/assistant responsibilities.
+
+The workflow is:
 
 1. Start with a clean worktree and no Git operation in progress. Fetch `origin`
    and fetch `main` directly from `https://github.com/ExLibrisGroup/customModule.git`.
@@ -60,18 +74,33 @@ workflow manually:
 3. Merge the recorded upstream SHA on that branch, preserving upstream history
    with a merge commit. Resolve conflicts individually, preserve MIT
    customizations, and review cleanly merged changes as well.
-4. Run the current CI tests and a development package build locally. Currently,
-   these use Node 24, `npm test -- --no-watch --browsers=ChromeHeadless`, and
+4. Run the script's `validate` command for CI tests and a development package
+   build. Currently, these use Node 24,
+   `npm test -- --no-watch --browsers=ChromeHeadless`, and
    `VIEW_ID=NDE_DEV npm run build`. Run `npm ci` if dependencies are missing or
-   changed. Verify the generated customization ZIP and test MIT behavior using
-   the local proxy as described above. Report unavailable manual checks explicitly.
-5. Commit the validated integration on its branch and **keep the branch**.
+   changed. The script checks a fresh customization ZIP and records the exact
+   validated tree. Test MIT behavior using the local proxy as described above.
+   Report unavailable manual checks explicitly. Validation requires Node 24,
+   npm, unzip, and a headless Chrome installation for the Angular tests.
+5. Use `finalize <message-file>` to commit the validated integration on its branch
+   and **keep the branch**. Include the recorded upstream SHA and co-author
+   trailer in the message, as detailed in the skill.
    The assistant must ask for explicit approval before pushing or opening a PR.
-6. After approval, fetch `origin` again. If `mit-main` has advanced, merge its new
-   tip into the integration branch and repeat validation before publishing.
-   Push only the integration branch and open a PR from it into **`mit-main`**.
+6. After approval, use `publish` with `--approved <full-HEAD-SHA>`,
+   `--title "<title>"`, and `--body-file <file>` to push and open a PR from the
+   integration branch into **`mit-main`**. This requires authenticated GitHub CLI (`gh`). Publication
+   rechecks `origin/mit-main`; if it has advanced, the script stops with exit 12.
+   Run `refresh`, resolve any conflicts, repeat `validate` and `finalize`, and
+   obtain renewed approval before publishing the updated commit.
    Do not push directly to `mit-main`, force-push, or automatically merge the PR.
 7. Follow the review and deployment steps above. The integration branch, not the
    upstream mirror `main`, is the PR head so conflict resolutions and MIT-specific
    adjustments are included in the reviewed changes.
 
+The script exits 10 when upstream is already integrated, 11 for unresolved
+conflicts, 12 when the remote base moved, 13 for failed/missing/stale validation,
+and 1 for other errors. See the skill for complete commands and recovery guidance.
+
+Run its isolated regression tests with
+`node --test .github/skills/merge-upstream/scripts/merge-upstream.test.cjs`.
+These tests do not contact GitHub or perform a real upstream integration.
