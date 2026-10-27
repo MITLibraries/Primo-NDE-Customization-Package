@@ -354,6 +354,19 @@ header.top-bar {
     }
 }
 
+// Reverse rendering order of logged-in user initials
+.user-area .user-area-logged-in span {
+    // Override Primo's flex display so bidi ordering works in Firefox.
+    display: inline-block !important;
+    // Keep dimensions and line-height equal for a circular badge with vertically centered text.
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+    line-height: 1.5rem;
+    text-align: center;
+    unicode-bidi: bidi-override;
+    direction: rtl;
+}
+
 //===============================================
 // SEARCH CONTAINERS (Homepage and Child Pages)
 //===============================================
