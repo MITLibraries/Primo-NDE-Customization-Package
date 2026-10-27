@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-	"prestart": "node prebuild.js",
+    "prestart": "node prebuild.js",
     "start:no-prebundle": "ng serve --prebundle=false",
     "start:proxy": "ng serve --proxy-config ./proxy/proxy.conf.mjs",
     "build": "ng build",
@@ -57,5 +57,11 @@
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
+  },
+  "allowScripts": {
+    "lmdb@3.0.13": true,
+    "msgpackr-extract@3.0.3": true,
+    "esbuild@0.21.5": true,
+    "esbuild@0.23.0": true
   }
 }
