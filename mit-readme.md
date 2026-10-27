@@ -39,8 +39,24 @@ In order to test changes against the most production-like environment, it is rec
 ## Deploying to production NDE view
 1. Tag a new release on the `mit-main` branch in GitHub.
 2. This will automatically run tests and generate a customization package targeting the `NDE` view.
-    - Note that the build artifact (01MIT_INST-NDE.zip) will land in the assets section of the release, not in the action summary: https://github.com/MITLibraries/Primo-NDE-Customization-Package/releases
+    - Note that the build artifact (`01MIT_INST-NDE-<build-id>.zip`) will land in the assets section of the release, not in the action summary: https://github.com/MITLibraries/Primo-NDE-Customization-Package/releases
 3. Deploy the .zip file to production `NDE` view via the Alma admin interface following the instructions at https://knowledge.exlibrisgroup.com/Primo/Product_Documentation/020Primo_VE/Primo_VE_(English)/050Display_Configuration/010Configuring_Discovery_Views_for_Primo_VE#Managing_Customization_Packages (Requires user with write access to Discovery Configuration in Alma)
+
+## Confirming the deployed build
+
+All development, stage, and production GitHub Actions builds use `<run_id>-<run_attempt>` as their build ID. Rerunning a workflow increments the attempt, producing a different ID.
+
+The downloaded ZIP is named `<INST_ID>-<VIEW_ID>-<build-id>.zip`, for example `01MIT_INST-NDE-123456789-1.zip`. The folder inside the ZIP remains `<INST_ID>-<VIEW_ID>` as required by Alma.
+
+To confirm which package is running, open the browser developer tools Console and reload the Primo view. When the customization module starts, it logs:
+
+```text
+[MIT Libraries customization] Build ID: 123456789-1
+```
+
+Match this value to the downloaded ZIP filename. Ensure informational messages are visible in the Console.
+
+Local builds and development servers use `local` unless you set `BUILD_ID`, for example `BUILD_ID=my-test-1 npm run build`. Build IDs must start with a letter or number and contain only letters, numbers, dots, underscores, or hyphens.
 
 ## Syncing with the upstream forked repository.
 This repository is forked from https://github.com/ExLibrisGroup/customModule
@@ -57,5 +73,4 @@ Note that our `main` branch tracks the upstream `main` branch:
 6. Delete your temporary branch.
 7. Open a PR to merge our `main` into our `mit-main`.
 8. Follow the steps above for testing and deploying to production.
-
 
