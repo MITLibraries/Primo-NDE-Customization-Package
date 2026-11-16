@@ -70,8 +70,9 @@ continuing.
    customizations (branding, themes, alerts, request cards, no-results
    behavior, header/footer/homepage assets, proxy and asset-path services)
    while incorporating upstream fixes. Never blindly accept "ours" or
-   "theirs" for every conflicting file. Stage resolved files explicitly, and
-   ask the user if a resolution is unclear.
+   "theirs" for every conflicting file. Ask the user if a resolution is unclear.
+   Stage resolved files explicitly, then run `git merge --continue` to complete
+   the merge commit before proceeding to testing and pushing.
 
 7. **Test the changes locally.** Follow the instructions in README.md:
    ```bash
