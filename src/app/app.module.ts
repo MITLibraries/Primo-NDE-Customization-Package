@@ -7,7 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { AutoAssetSrcDirective } from './services/auto-asset-src.directive';
 import { SHELL_ROUTER } from './injection-tokens';
-import { trackPageViews } from './services/matomo-tracking';
+import { MatomoTrackingService } from './services/matomo-tracking.service';
 
 export const AppModule = ({
   providers,
@@ -20,7 +20,11 @@ export const AppModule = ({
     declarations: [AutoAssetSrcDirective],
     exports: [AutoAssetSrcDirective],
     imports: [BrowserModule, CommonModule, TranslateModule.forRoot({})],
-    providers: [...providers, { provide: SHELL_ROUTER, useValue: shellRouter }],
+    providers: [
+      ...providers,
+      { provide: SHELL_ROUTER, useValue: shellRouter },
+      MatomoTrackingService,
+    ],
     bootstrap: [],
   })
   class AppModule implements DoBootstrap {
@@ -32,9 +36,10 @@ export const AppModule = ({
     constructor(
       private injector: Injector,
       private router: Router,
+      matomoTracking: MatomoTrackingService,
     ) {
       router.dispose(); //this prevents the router from being initialized and interfering with the shell app router
-      trackPageViews(shellRouter);
+      matomoTracking.start();
     }
 
     ngDoBootstrap(appRef: ApplicationRef) {
