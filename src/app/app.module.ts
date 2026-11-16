@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { AutoAssetSrcDirective } from './services/auto-asset-src.directive';
 import { SHELL_ROUTER } from './injection-tokens';
+import { trackPageViews } from './services/matomo-tracking';
 
 export const AppModule = ({
   providers,
@@ -33,6 +34,7 @@ export const AppModule = ({
       private router: Router,
     ) {
       router.dispose(); //this prevents the router from being initialized and interfering with the shell app router
+      trackPageViews(shellRouter);
     }
 
     ngDoBootstrap(appRef: ApplicationRef) {
