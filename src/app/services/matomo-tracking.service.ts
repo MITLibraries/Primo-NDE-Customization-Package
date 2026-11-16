@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Injectable, inject } from '@angular/core';
-import { NavigationEnd } from '@angular/router';
+import { EventType } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { SHELL_ROUTER } from '../injection-tokens';
 
@@ -35,7 +35,9 @@ export class MatomoTrackingService {
     this.schedule(this.router.url);
 
     this.subscription = this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
+      // Compare the event type instead of using instanceof: the shell may load
+      // a different copy of @angular/router, which would make instanceof fail.
+      if (event.type === EventType.NavigationEnd) {
         this.schedule(event.urlAfterRedirects);
       }
     });
