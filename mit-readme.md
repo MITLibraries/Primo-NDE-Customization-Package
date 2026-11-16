@@ -2,8 +2,6 @@
 ## Special branches
 * `mit-main` is our default branch and contains our production code
   * Pushing directly to `mit-main` is disabled by a branch protection rule
-* `main` tracks the forked upstream repository's `main` branch at https://github.com/ExLibrisGroup/customModule/tree/main
-  * See instructions below for syncing with the forked repository
 
 # Development workflows
 
@@ -61,19 +59,17 @@ Match this value to the downloaded ZIP filename. Ensure informational messages a
 
 Local builds and development servers use `local` unless you set `BUILD_ID`, for example `BUILD_ID=my-test-1 npm run build`. Build IDs must start with a letter or number and contain only letters, numbers, dots, underscores, or hyphens.
 
-## Syncing with the upstream forked repository.
+## Syncing with the upstream forked repository
 This repository is forked from https://github.com/ExLibrisGroup/customModule
 
-Take the following steps to sync our local repository with changes from this upstream repository.
+If you're using an AI coding agent, invoke the [sync-upstream skill](../.github/skills/sync-upstream/SKILL.md) to run steps 1-7 for you; you then open the PR and follow the remaining steps yourself. Otherwise, take the following steps manually to sync our repository with changes from this upstream repository.
 
-Note that our `main` branch tracks the upstream `main` branch:
-
-1. Sync our `main` branch in GitHub using the `sync fork` button.
-2. Assuming the NDE development environment is running locally, run `git pull origin main` to pull down our local copy of the upstream `main`.
-3. Run `git checkout mit-main` and make sure you have the most recent commits with `git pull origin mit-main`.
-4. Create a temporary local branch, e.g., `git checkout -B test-upstream-changes`.
-5. Run `git merge main` and confirm that the upstream changes haven't broken anything.
-6. Delete your temporary branch.
-7. Open a PR to merge our `main` into our `mit-main`.
-8. Follow the steps above for testing and deploying to production.
-
+1. (Optional, one-time setup) If you don't already have an `upstream` remote configured, check with `git remote -v`. If `upstream` is missing, add it: `git remote add upstream https://github.com/ExLibrisGroup/customModule.git`.
+2. Fetch the latest changes from the upstream repository: `git fetch upstream`.
+3. Update your local `mit-main` branch: `git checkout mit-main && git pull origin mit-main`.
+4. Create a new branch from `mit-main` for the sync, e.g. `git checkout -b sync-upstream-YYYY-MM-DD`. If you already synced today, or that branch name exists locally or on origin, add a suffix such as `-2`.
+5. Merge the upstream changes directly into your new branch: `git merge upstream/main`. Resolve any merge conflicts if they occur.
+6. Test the changes locally by running the development server with proxy `npm run start:proxy`, following the instructions in README.md, and confirm nothing is broken.
+7. Push your branch to GitHub: `git push origin <your-sync-branch>`.
+8. Open a PR on GitHub to merge your branch into `mit-main` and request a review.
+9. Once your PR is reviewed and approved, follow the steps above for testing and deploying to production.
